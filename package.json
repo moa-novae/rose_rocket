@@ -1,0 +1,19 @@
+{
+  "name": "rose_rocket",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.6.0"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "scripts": {
+    "dev": "nodemon index.js"
+  },
+  "type": "module",
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
