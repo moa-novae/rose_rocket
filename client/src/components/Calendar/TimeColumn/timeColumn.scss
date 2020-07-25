@@ -1,0 +1,30 @@
+.time-column {
+  width: 5em;
+  display: flex;
+  flex-direction: column;
+  .time-column-header {
+    height: 2.75em;
+  }
+  .time-slots {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    .time-slot {
+      // 24 slots in time-slots so 100 / 24
+      height: (100% / 24);
+      display: flex;
+      flex-direction: row;
+      .time-number {
+        height: 100%;
+        position: relative;
+        top: -0.5em;
+      }
+      .time-notch {
+        height: 100%;
+        width: 0.4em;
+        border-top: #dadce0 1px solid;
+      }
+    }
+  }
+}

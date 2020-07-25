@@ -1,0 +1,18 @@
+.day-column {
+  min-width: 6em;
+  .day-header {
+    min-height: 2em;
+    padding: 0 1em;
+    text-align: center;
+    line-height: 2em;
+  }
+  .notch {
+    height: 0.75em;
+    border: #dadce0 1px solid;
+    border-top: 0;
+  }
+  .hour-block {
+    min-height: 3em;
+    border: #dadce0 1px solid;
+  }
+}
