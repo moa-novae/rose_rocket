@@ -12,11 +12,23 @@ export default function () {
   const { changeWeekBy, week } = useCalendar();
 
   return (
-    <div>
-      {week}
-      <FontAwesomeIcon icon={faArrowLeft} onClick={() => changeWeekBy(-1)} />
-      <FontAwesomeIcon icon={faArrowRight} onClick={() => changeWeekBy(1)} />
-      <div className="calendar">
+    <div className="calendar">
+      <div className="calendar-header">
+        <span className="calendar-week">{`Week ${week}`}</span>
+        <span className="calendar-week-btn">
+          <FontAwesomeIcon
+            icon={faArrowLeft}
+            onClick={() => changeWeekBy(-1)}
+          />
+        </span>
+        <span className="calendar-week-btn">
+          <FontAwesomeIcon
+            icon={faArrowRight}
+            onClick={() => changeWeekBy(1)}
+          />
+        </span>
+      </div>
+      <div className="calendar-body">
         <TimeColumn />
         {dayColumns}
       </div>
