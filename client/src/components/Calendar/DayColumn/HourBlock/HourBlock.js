@@ -1,11 +1,11 @@
 import React from "react";
+import Task from "./Task/Task"
 
 // Each hour block can display one task if there is one
-export default function HourBlock({ taskDetail }) {
-  const Task = ({ taskDetails }) => <div className="task">{taskDetails}</div>;
+export default function HourBlock({ taskInfo }) {
   return (
     <div className="hour-block">
-      {taskDetail && <Task taskDetails={taskDetail} />}
+      {taskInfo && <Task taskInfo={taskInfo} />}
     </div>
   );
 }

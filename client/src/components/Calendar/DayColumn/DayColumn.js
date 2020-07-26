@@ -1,12 +1,13 @@
 import React from "react";
 import "./dayColumn.scss";
-import HourBlock from './HourBlock/HourBlock'
-export default function (props) {
-  const { day } = props;
+import HourBlock from "./HourBlock/HourBlock";
+export default function ({ day, dailyTasks }) {
   const dayBlock = [];
   //each day has 24 hour blocks
   for (let i = 0; i < 24; i++) {
-    dayBlock.push(<HourBlock />);
+    console.log("dailytasks", dailyTasks);
+    const taskInfo = dailyTasks.filter((task) => task.time.hour === i)[0];
+    dayBlock.push(<HourBlock taskInfo={taskInfo} />);
   }
 
   return (
