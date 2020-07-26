@@ -8,11 +8,11 @@
   }
   .notch {
     height: 0.75em;
-    border: #dadce0 1px solid;
-    border-top: 0;
+    border-left: #dadce0 1px solid;
   }
   .hour-block {
     min-height: 3em;
-    border: #dadce0 1px solid;
+    border-top: #dadce0 1px solid;
+    border-left: #dadce0 1px solid;
   }
 }
