@@ -15,8 +15,10 @@ export default function useCalendar() {
   No use for time state right now since not using real world time
   */
   // const [time, setTime] = useState(0);
+  // weeks starts incrementing at 0
   const [calendarTime, setCalendarTime] = useState(0);
-
+  // state responsible for controlled input of calendar header weeks
+  const [weekInput, setWeekInput] = useState(calendarTime);
   const timeRatio = {
     hour: 1,
     day: 24,
@@ -43,6 +45,28 @@ export default function useCalendar() {
     const hour = time % timeRatio.day;
     return { day, hour };
   };
+
+  // handles controlled input of calendar header
+  const handleOnChange = function (e) {
+    const newValue = e.target.value.trim();
+    // number must be between 0-51 included
+    console.log(weekInput);
+    const re = /^([0-9]|[1-4][0-9]|5[01])$/;
+    setWeekInput((prev) => {
+      if (re.test(newValue) || newValue === "") {
+        return newValue;
+      } else {
+        return prev;
+      }
+    });
+  };
+
+  const handleWeekJump = function() {
+    const weekDifference = weekInput - week
+    console.log(weekDifference)
+    changeWeekBy(weekDifference)
+  }
+
   let weeklyTasks = [];
   if (week === 0) {
     //api response placeholder
@@ -64,5 +88,8 @@ export default function useCalendar() {
     changeWeekBy,
     week,
     weeklyTasks,
+    weekInput,
+    handleOnChange,
+    handleWeekJump,
   };
 }

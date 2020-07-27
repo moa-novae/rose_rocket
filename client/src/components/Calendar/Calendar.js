@@ -5,9 +5,20 @@ import useCalendar from "./useCalendar";
 import "./calendar.scss";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import {
+  faChevronLeft,
+  faChevronRight,
+  faArrowRight,
+} from "@fortawesome/free-solid-svg-icons";
 export default function () {
-  const { changeWeekBy, week, weeklyTasks } = useCalendar();
+  const {
+    changeWeekBy,
+    week,
+    weeklyTasks,
+    weekInput,
+    handleOnChange,
+    handleWeekJump,
+  } = useCalendar();
   const days = ["Sun", "Mon", "Tue", "Thu", "Fri", "Sat"];
   //task of each day is passed to each DayColumn
   const dayColumns = days.map((day, i) => {
@@ -22,13 +33,13 @@ export default function () {
           <div className="calendar-week-btns">
             <div className="calendar-week-btn">
               <FontAwesomeIcon
-                icon={faArrowLeft}
+                icon={faChevronLeft}
                 onClick={() => changeWeekBy(-1)}
               />
             </div>
             <div className="calendar-week-btn">
               <FontAwesomeIcon
-                icon={faArrowRight}
+                icon={faChevronRight}
                 onClick={() => changeWeekBy(1)}
               />
             </div>
@@ -36,7 +47,13 @@ export default function () {
         </div>
         <div className="calendar-header-right">
           Change week to
-          <input type="number" max="52" />
+          <input
+            // not using type='number'
+            // since easier to use regex to limit value to 0<=x<-51
+            value={weekInput}
+            onChange={handleOnChange}
+          />
+          <FontAwesomeIcon icon={faArrowRight} onClick={handleWeekJump} />
         </div>
       </div>
       <div className="calendar-body">
