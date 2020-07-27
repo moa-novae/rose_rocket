@@ -9,7 +9,6 @@ import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 export default function () {
   const { changeWeekBy, week, weeklyTasks } = useCalendar();
   const days = ["Sun", "Mon", "Tue", "Thu", "Fri", "Sat"];
-
   //task of each day is passed to each DayColumn
   const dayColumns = days.map((day, i) => {
     const dailyTasks = weeklyTasks.filter((task) => task.time.day === i);
@@ -18,21 +17,27 @@ export default function () {
   return (
     <div className="calendar">
       <div className="calendar-header">
-        <span className="calendar-week">{`Week ${week}`}</span>
-        <span className="calendar-week-btns">
-          <span className="calendar-week-btn">
-            <FontAwesomeIcon
-              icon={faArrowLeft}
-              onClick={() => changeWeekBy(-1)}
-            />
-          </span>
-          <span className="calendar-week-btn">
-            <FontAwesomeIcon
-              icon={faArrowRight}
-              onClick={() => changeWeekBy(1)}
-            />
-          </span>
-        </span>
+        <div className="calendar-header-left">
+          <div className="calendar-week">{`Week ${week}`}</div>
+          <div className="calendar-week-btns">
+            <div className="calendar-week-btn">
+              <FontAwesomeIcon
+                icon={faArrowLeft}
+                onClick={() => changeWeekBy(-1)}
+              />
+            </div>
+            <div className="calendar-week-btn">
+              <FontAwesomeIcon
+                icon={faArrowRight}
+                onClick={() => changeWeekBy(1)}
+              />
+            </div>
+          </div>
+        </div>
+        <div className="calendar-header-right">
+          Change week to
+          <input type="number" max="52" />
+        </div>
       </div>
       <div className="calendar-body">
         <TimeColumn />

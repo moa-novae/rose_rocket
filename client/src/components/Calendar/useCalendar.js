@@ -29,6 +29,7 @@ export default function useCalendar() {
   };
   // number of week into the year
   const week = convertTime(calendarTime % timeRatio.year, "hour", "week");
+
   const changeWeekBy = (n) => {
     setCalendarTime((prev) => {
       const newWeek = prev + n * timeRatio.week;
