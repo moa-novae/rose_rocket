@@ -1,7 +1,7 @@
 import React from "react";
 import DayColumn from "./DayColumn/DayColumn";
 import TimeColumn from "./TimeColumn/TimeColumn";
-import CalendarHeader from "./CalendarHeader/CalendarHeader";
+import CalendarMainHeader from "./CalendarMainHeader/CalendarMainHeader";
 import useCalendar from "./useCalendar";
 import "./calendar.scss";
 
@@ -22,16 +22,18 @@ export default function () {
   });
   return (
     <div className="calendar">
-      <CalendarHeader
-        week={week}
-        changeWeekBy={changeWeekBy}
-        weekInput={weekInput}
-        handleOnChange={handleOnChange}
-        handleWeekJump={handleWeekJump}
-      />
-      <div className="calendar-body">
-        <TimeColumn />
-        {dayColumns}
+      <div className="calendar-main">
+        <CalendarMainHeader
+          week={week}
+          changeWeekBy={changeWeekBy}
+          weekInput={weekInput}
+          handleOnChange={handleOnChange}
+          handleWeekJump={handleWeekJump}
+        />
+        <div className="calendar-main-body">
+          <TimeColumn />
+          {dayColumns}
+        </div>
       </div>
     </div>
   );

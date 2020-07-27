@@ -4,11 +4,13 @@
   align-items: flex-start;
   margin: 2em;
   color: #70757a;
-    .calendar-body {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: stretch;
-    flex-direction: row;
+  .calendar-main {
+    .calendar-main-body {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+      flex-direction: row;
+    }
   }
 }

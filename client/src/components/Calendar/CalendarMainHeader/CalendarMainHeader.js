@@ -5,7 +5,7 @@ import {
   faChevronRight,
   faArrowRight,
 } from "@fortawesome/free-solid-svg-icons";
-import "./calendarHeader.scss";
+import "./calendarMainHeader.scss";
 
 export default function CalendarHeader(props) {
   const {
