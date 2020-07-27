@@ -5,7 +5,6 @@ export default function ({ day, dailyTasks }) {
   const dayBlock = [];
   //each day has 24 hour blocks
   for (let i = 0; i < 24; i++) {
-    console.log("dailytasks", dailyTasks);
     const taskInfo = dailyTasks.filter((task) => task.time.hour === i)[0];
     dayBlock.push(<HourBlock taskInfo={taskInfo} />);
   }

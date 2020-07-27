@@ -11,7 +11,6 @@ export default function () {
   const days = ["Sun", "Mon", "Tue", "Thu", "Fri", "Sat"];
 
   //task of each day is passed to each DayColumn
-  console.log("week", weeklyTasks);
   const dayColumns = days.map((day, i) => {
     const dailyTasks = weeklyTasks.filter((task) => task.time.day === i);
     return <DayColumn day={day} dailyTasks={dailyTasks} />;
