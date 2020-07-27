@@ -1,10 +1,12 @@
-import React from "react"
+import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChevronLeft,
   faChevronRight,
   faArrowRight,
 } from "@fortawesome/free-solid-svg-icons";
+import "./calendarHeader.scss";
+
 export default function CalendarHeader(props) {
   const {
     week,
