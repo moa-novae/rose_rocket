@@ -39,7 +39,7 @@ export default function useCalendar() {
       return newWeek >= 0 ? newWeek : prev;
     });
   };
-
+  // return which day of the week and what hour in 24hr
   const findDayAndHourFromTime = function (time) {
     const day = Math.floor((time % timeRatio.week) / timeRatio.day);
     const hour = time % timeRatio.day;
@@ -61,12 +61,14 @@ export default function useCalendar() {
     });
   };
 
+  // change week to selected week from week input box
   const handleWeekJump = function() {
     const weekDifference = weekInput - week
     console.log(weekDifference)
     changeWeekBy(weekDifference)
   }
 
+  // temp data
   let weeklyTasks = [];
   if (week === 0) {
     //api response placeholder

@@ -6,22 +6,22 @@
   z-index: 99;
   left: 0;
   top: 0;
-  // modal shows up fixed near center of screen
-  .modal {
-    position: fixed;
-    z-index: 100;
-    background-color: #fafafa;
-    width: 50%;
-    max-width: 30em;
-    border: 1px solid #ccc;
-    box-shadow: 0 7px 12px rgba(154, 160, 185, 0.1),
-      0 17px 42px rgba(166, 173, 201, 0.3);
-    padding: 16px;
-    left: 30%;
-    top: 30%;
-    min-height: 30%;
-    box-sizing: border-box;
-  }
+}
+// modal shows up fixed near center of screen
+.modal {
+  position: fixed;
+  z-index: 100;
+  background-color: #fafafa;
+  width: 50%;
+  max-width: 30em;
+  border: 1px solid #ccc;
+  box-shadow: 0 7px 12px rgba(154, 160, 185, 0.1),
+    0 17px 42px rgba(166, 173, 201, 0.3);
+  padding: 16px;
+  left: 30%;
+  top: 30%;
+  min-height: 30%;
+  box-sizing: border-box;
 }
 
 @media (min-width: 600px) {

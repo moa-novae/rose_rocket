@@ -3,14 +3,18 @@ import "./modal.scss";
 export default function Modal({ showModal, setShowModal, children }) {
   return (
     // only show modal if showModal === true
-    <div
-      className="backdrop"
-      style={{ display: showModal ? "flex" : "none" }}
-      onClick={() => {
-        setShowModal(false);
-      }}
-    >
-      <div className="modal">{children}</div>
-    </div>
+    <>
+      {showModal && (
+        <>
+          <div
+            className="backdrop"
+            onClick={() => {
+              setShowModal(false);
+            }}
+          ></div>
+          <div className="modal">{children}</div>
+        </>
+      )}
+    </>
   );
 }

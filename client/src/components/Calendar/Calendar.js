@@ -2,6 +2,7 @@ import React from "react";
 import DayColumn from "./DayColumn/DayColumn";
 import TimeColumn from "./TimeColumn/TimeColumn";
 import CalendarMainHeader from "./CalendarMainHeader/CalendarMainHeader";
+import CalendarSidebar from "./CalendarSidebar/CalendarSidebar";
 import useCalendar from "./useCalendar";
 import "./calendar.scss";
 
@@ -22,6 +23,9 @@ export default function () {
   });
   return (
     <div className="calendar">
+      <div className="calendar-sidebar">
+        <CalendarSidebar />
+      </div>
       <div className="calendar-main">
         <CalendarMainHeader
           week={week}
