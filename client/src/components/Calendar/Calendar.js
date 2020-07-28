@@ -15,18 +15,21 @@ export default function () {
     weekInput,
     handleOnChange,
     handleWeekJump,
-    toggleDriverSelected
+    toggleDriverSelected,
   } = useCalendar();
   const days = ["Sun", "Mon", "Tue", "Thu", "Fri", "Sat"];
   //task of each day is passed to each DayColumn
   const dayColumns = days.map((day, i) => {
     const dailyTasks = weeklyTasks.filter((task) => task.time.day === i);
-    return <DayColumn day={day} dailyTasks={dailyTasks} />;
+    return <DayColumn day={day} dailyTasks={dailyTasks} drivers={drivers} />;
   });
   return (
     <div className="calendar">
       <div className="calendar-sidebar">
-        <CalendarSidebar drivers={drivers} toggleDriverSelected={toggleDriverSelected}/>
+        <CalendarSidebar
+          drivers={drivers}
+          toggleDriverSelected={toggleDriverSelected}
+        />
       </div>
       <div className="calendar-main">
         <CalendarMainHeader
