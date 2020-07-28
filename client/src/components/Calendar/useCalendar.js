@@ -101,14 +101,15 @@ export default function useCalendar() {
       {
         name: "task1",
         detail: "very cool",
-        time: 100,
+        time: { start: 100, end: 103 },
         driver: { id: 1, name: "bob" },
       },
     ];
     //transform data to indicate day and time
     weeklyTasks = weeklyTasks.map((task) => ({
       ...task,
-      time: findDayAndHourFromTime(task.time),
+      time: findDayAndHourFromTime(task.time.start),
+      duration: task.time.end - task.time.start,
     }));
   }
   if (week === 1) {
@@ -116,13 +117,14 @@ export default function useCalendar() {
       {
         name: "task2",
         detail: "super cool",
-        time: 200,
+        time: { start: 200, end: 202 },
         driver: { id: 2, name: "joe" },
       },
     ];
     weeklyTasks = weeklyTasks.map((task) => ({
       ...task,
-      time: findDayAndHourFromTime(task.time),
+      time: findDayAndHourFromTime(task.time.start),
+      duration: task.time.end - task.time.start,
     }));
   }
 

@@ -11,9 +11,19 @@
     height: 0.75em;
     border-left: #dadce0 1px solid;
   }
-  .hour-block {
-    min-height: 3em;
-    border-top: #dadce0 1px solid;
-    border-left: #dadce0 1px solid;
+  .day-block {
+    position: relative;
+    height: 3em * 24;
+    .hour-blocks {
+      width: 100%;
+      height: 100%;
+    }
+    .task-block {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
   }
 }

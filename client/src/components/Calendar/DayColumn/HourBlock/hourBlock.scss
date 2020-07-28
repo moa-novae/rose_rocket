@@ -1,0 +1,8 @@
+.hour-block {
+  height: (100% / 24);
+  width: 100%;
+  // allows easier calculation of task box height
+  box-sizing: border-box;
+  border-top: #dadce0 1px solid;
+  border-left: #dadce0 1px solid;
+}
