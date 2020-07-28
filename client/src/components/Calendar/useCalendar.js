@@ -8,6 +8,8 @@ import { useState } from "react";
   time works myself.
  */
 export default function useCalendar() {
+  /* I've elected to use useState instead of useReducer because the various states 
+  don't really rely on the value of another state in order to update*/
   /* Time 0 is set set arbitrarily to some point in the spacetime
   Each increment of 1 represents the passing of one hour
   Not sure if this is the best way to keep track of time
@@ -19,6 +21,29 @@ export default function useCalendar() {
   const [calendarTime, setCalendarTime] = useState(0);
   // state responsible for controlled input of calendar header weeks
   const [weekInput, setWeekInput] = useState(calendarTime);
+  // keep track of which drivers fall under the dispatcher each year
+  // and whether they are shown on the calendar
+  const driversTemp = [
+    { id: 1, name: "bob", selected: true },
+    { id: 2, name: "joe", selected: true },
+  ];
+  const [drivers, setDrivers] = useState(driversTemp);
+
+  const toggleDriverSelected = function (driverId) {
+    setDrivers((prev) => {
+      // find index of toggled driver in state array
+      const toggledDriverIndex = prev
+        .map((driver) => driver.id)
+        .indexOf(driverId);
+      // // construct new state array where selected bool is toggled
+      return prev.map((driver, i) => {
+        if (i === toggledDriverIndex) {
+          return { ...driver, selected: !driver.selected };
+        }
+        return driver;
+      });
+    });
+  };
   const timeRatio = {
     hour: 1,
     day: 24,
@@ -62,17 +87,24 @@ export default function useCalendar() {
   };
 
   // change week to selected week from week input box
-  const handleWeekJump = function() {
-    const weekDifference = weekInput - week
-    console.log(weekDifference)
-    changeWeekBy(weekDifference)
-  }
+  const handleWeekJump = function () {
+    const weekDifference = weekInput - week;
+    console.log(weekDifference);
+    changeWeekBy(weekDifference);
+  };
 
   // temp data
   let weeklyTasks = [];
   if (week === 0) {
     //api response placeholder
-    weeklyTasks = [{ name: "task1", detail: "very cool", time: 100 }];
+    weeklyTasks = [
+      {
+        name: "task1",
+        detail: "very cool",
+        time: 100,
+        driver: { id: 1, name: "bob" },
+      },
+    ];
     //transform data to indicate day and time
     weeklyTasks = weeklyTasks.map((task) => ({
       ...task,
@@ -80,12 +112,20 @@ export default function useCalendar() {
     }));
   }
   if (week === 1) {
-    weeklyTasks = [{ name: "task2", detail: "super cool", time: 200 }];
+    weeklyTasks = [
+      {
+        name: "task2",
+        detail: "super cool",
+        time: 200,
+        driver: { id: 2, name: "joe" },
+      },
+    ];
     weeklyTasks = weeklyTasks.map((task) => ({
       ...task,
       time: findDayAndHourFromTime(task.time),
     }));
   }
+
   return {
     changeWeekBy,
     week,
@@ -93,5 +133,7 @@ export default function useCalendar() {
     weekInput,
     handleOnChange,
     handleWeekJump,
+    drivers,
+    toggleDriverSelected,
   };
 }

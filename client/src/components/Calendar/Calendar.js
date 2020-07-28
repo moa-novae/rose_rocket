@@ -9,11 +9,13 @@ import "./calendar.scss";
 export default function () {
   const {
     changeWeekBy,
+    drivers,
     week,
     weeklyTasks,
     weekInput,
     handleOnChange,
     handleWeekJump,
+    toggleDriverSelected
   } = useCalendar();
   const days = ["Sun", "Mon", "Tue", "Thu", "Fri", "Sat"];
   //task of each day is passed to each DayColumn
@@ -24,7 +26,7 @@ export default function () {
   return (
     <div className="calendar">
       <div className="calendar-sidebar">
-        <CalendarSidebar />
+        <CalendarSidebar drivers={drivers} toggleDriverSelected={toggleDriverSelected}/>
       </div>
       <div className="calendar-main">
         <CalendarMainHeader
