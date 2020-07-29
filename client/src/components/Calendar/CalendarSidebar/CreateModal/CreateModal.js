@@ -29,18 +29,18 @@ export default function CreateModal({
     startDay: "",
     startHour: "",
     endHour: "",
-    endDay: "",
     startLocation: "",
     endLocation: "",
     description: "",
   };
   const {
     form,
-    handleAddTask,
+    errors,
+    handleSubmit,
     handleOnChange,
     handleDriverChange,
     handleTaskTypeChange,
-  } = useCreateModal(initialState, addTask);
+  } = useCreateModal(initialState, addTask, setShowModal);
   return (
     <Modal showModal={showModal} setShowModal={setShowModal}>
       <div className="create-modal-content-wrapper">
@@ -53,6 +53,7 @@ export default function CreateModal({
               value={form.name}
               handleOnChange={handleOnChange}
             />
+            <div className="form-modal-error">{errors.name}</div>
           </div>
           <div className="task-type-dd-wrapper">
             {/* choose task type */}
@@ -62,10 +63,12 @@ export default function CreateModal({
               selected={form.taskType}
               select={handleTaskTypeChange}
             />
+            <div className="form-modal-error">{errors.taskType}</div>
           </div>
         </div>
         <div className="create-modal-icon twos">
           <FontAwesomeIcon icon={faTruckMoving} />
+
           <DropdownSingle
             list={drivers}
             title="Driver"
@@ -73,9 +76,11 @@ export default function CreateModal({
             select={handleDriverChange}
           />
         </div>
+        <div className="form-modal-error outer">{errors.driver}</div>
 
         <div className="create-modal-icon fours">
           <FontAwesomeIcon icon={faClock} />
+
           <TextInput
             placeholder="Day"
             name="startDay"
@@ -95,13 +100,8 @@ export default function CreateModal({
             value={form.endHour}
             handleOnChange={handleOnChange}
           />
-          <TextInput
-            placeholder="Day"
-            name="endDay"
-            value={form.endDay}
-            handleOnChange={handleOnChange}
-          />
         </div>
+        <div className="form-modal-error outer"> {errors.time}</div>
         <div className="create-modal-icon twos">
           <FontAwesomeIcon icon={faMapMarkerAlt} />
 
@@ -127,13 +127,7 @@ export default function CreateModal({
           />
         </div>
         <div className="save-btn-wrapper">
-          <button
-            className="simple-btn"
-            onClick={() => {
-              handleAddTask();
-              setShowModal(false);
-            }}
-          >
+          <button className="simple-btn" onClick={handleSubmit}>
             Save
           </button>
         </div>

@@ -66,6 +66,7 @@ export default function useCalendar() {
       const newTasksMap = new Map(prev);
       const id = uniqueId();
       newTasksMap.set(id, { ...task, id: id });
+      console.log('map', newTasksMap)
       return newTasksMap;
     });
   };

@@ -1,23 +1,31 @@
 .create-modal-content-wrapper {
   display: flex;
   flex-direction: column;
-  label {
-    margin-left: 10%;
+  .form-modal-error {
+    font-size: 0.8rem;
+    color: #ff3b3b;
+    height: 0.8em;
     text-align: left;
-    font-size: 0.8em;
+    margin-top: 0.4em;
+    &.outer {
+      margin-left: 12%;
+    }
   }
   .create-modal-first {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    height: 2.5em;
     margin: 1em 0 1em 12%;
     width: 85%;
     .task-name-input-wrapper {
       width: 60%;
+
       margin-right: 0em;
     }
     .task-type-dd-wrapper {
       width: 35%;
+      height: 100%;
     }
     &.description {
       height: 5em;
@@ -37,7 +45,7 @@
         margin-right: 1em;
         margin-left: 2%;
       }
-      & > svg {
+      svg {
         width: 10%;
       }
     }
@@ -46,7 +54,7 @@
         width: 20%;
         margin: 2%;
       }
-      & > svg {
+      svg {
         width: 10%;
       }
     }
@@ -58,7 +66,7 @@
     button {
       width: 30%;
       color: #fafafa;
-      background-color: #1a73e8; 
+      background-color: #1a73e8;
       &:hover {
         background-color: #2382ff;
       }
