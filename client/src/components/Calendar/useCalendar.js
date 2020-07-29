@@ -38,6 +38,7 @@ export default function useCalendar() {
         detail: "very cool",
         time: { start: 100, end: 103 },
         driver: { id: 1, name: "bob" },
+        location: { start: "a", finish: "b" },
       },
     ],
     [
@@ -48,6 +49,7 @@ export default function useCalendar() {
         detail: "super cool",
         time: { start: 200, end: 202 },
         driver: { id: 2, name: "joe" },
+        location: { start: "c", finish: "d" },
       },
     ],
   ]);
