@@ -8,7 +8,7 @@ export default function CalendarSidebar({
   driversList,
   toggleDriverSelected,
 }) {
-  const [showCreateModal, setShowCreateModal] = useState(true);
+  const [showCreateModal, setShowCreateModal] = useState(false);
   return (
     <div className="calendar-sidebar-content">
       <div className="new-task-btn-wrapper">

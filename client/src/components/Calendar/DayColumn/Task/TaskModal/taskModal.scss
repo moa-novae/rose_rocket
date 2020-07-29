@@ -1,0 +1,21 @@
+.task-wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 1em 2em 2em 2em;
+  .task-name {
+    font-size: 1.3rem;
+  }
+  .task-line {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 1em 0;
+    &.no-icon {
+      margin-left: 10%;
+    }
+    svg {
+      width: 10%;
+    }
+  }
+}
