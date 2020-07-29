@@ -64,8 +64,9 @@ export default function useCalendar() {
   const addTask = function (task) {
     setYearlyTasks((prev) => {
       const newTasksMap = new Map(prev);
-      const id = uniqueId();
-      newTasksMap.set(id, { ...task, id: id });
+      // it id exists, the task is edited by reusing id
+      const id = task.id ? task.id : uniqueId()
+      newTasksMap.set(id, { ...task, id });
       console.log('map', newTasksMap)
       return newTasksMap;
     });

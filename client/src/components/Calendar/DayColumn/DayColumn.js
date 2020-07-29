@@ -2,7 +2,7 @@ import React from "react";
 import "./dayColumn.scss";
 import HourBlock from "./HourBlock/HourBlock";
 import Task from "./Task/Task";
-export default function ({ day, dailyTasks, drivers }) {
+export default function ({ day, dailyTasks, drivers, driversList, addTask }) {
   // add 24 HourBlocks to each DayColumn
   // each HourBlock is assigned an hour
   const hourBlocks = Array(24).fill(<HourBlock />);
@@ -12,7 +12,7 @@ export default function ({ day, dailyTasks, drivers }) {
     .filter((task) =>
       drivers.some((driver) => driver.selected && driver.id === task.driver.id)
     )
-    .map((task) => <Task key={task.id} taskInfo={task} />);
+    .map((task) => <Task key={task.id} taskInfo={task} drivers={driversList} addTask={addTask}/>);
 
   return (
     <div className="day-column">

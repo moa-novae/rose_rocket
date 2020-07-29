@@ -24,7 +24,13 @@ export default function () {
   const dayColumns = days.map((day, i) => {
     const dailyTasks = weeklyTasks.filter((task) => task.day === i);
     return (
-      <DayColumn day={day} dailyTasks={dailyTasks} drivers={driversSelected} />
+      <DayColumn
+        day={day}
+        dailyTasks={dailyTasks}
+        drivers={driversSelected}
+        driversList={driversList}
+        addTask={addTask}
+      />
     );
   });
   return (

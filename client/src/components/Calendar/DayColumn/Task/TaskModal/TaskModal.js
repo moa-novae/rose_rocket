@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Modal from "../../../../Modal/Modal";
+import CreateModal from "../../../CalendarSidebar/CreateModal/CreateModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faMapMarkerAlt,
@@ -10,19 +11,41 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { convertTime } from "../../../../../utils/convertTime";
 import "./taskModal.scss";
-export default function TaskModal({ taskInfo, showModal, setShowModal }) {
+export default function TaskModal({
+  taskInfo,
+  showModal,
+  setShowModal,
+  drivers,
+  addTask,
+}) {
   const day = taskInfo.time.start % (24 * 7);
   const week = Math.floor(convertTime(taskInfo.time.start, "hour", "week"));
   const startHour = taskInfo.time.start % 24;
   const endHour = taskInfo.time.end % 24;
+  const initialState = {
+    name: taskInfo.name,
+    taskType: { id: taskInfo.type },
+    driver: { id: taskInfo.driver.id },
+    startDay: Math.floor(convertTime(taskInfo.time.start, "hour", "day")),
+    startHour: taskInfo.time.start % 24,
+    endHour: taskInfo.time.end % 24,
+    startLocation: taskInfo.location.start,
+    endLocation: taskInfo.location.finish,
+    description: taskInfo.detail,
+  };
   const [mode, setMode] = useState("view");
   return (
     <>
-      <Modal showModal={showModal} setShowModal={setShowModal}>
-        {mode === "view" && (
+      {mode === "view" && (
+        <Modal showModal={showModal} setShowModal={setShowModal}>
           <div className="task-wrapper">
             <div className="action-wrapper">
-              <FontAwesomeIcon icon={faEdit} />
+              <FontAwesomeIcon
+                icon={faEdit}
+                onClick={() => {
+                  setMode("edit");
+                }}
+              />
               <FontAwesomeIcon icon={faTrashAlt} />
             </div>
             <div className="task-name">{taskInfo.name}</div>
@@ -54,8 +77,17 @@ export default function TaskModal({ taskInfo, showModal, setShowModal }) {
               <div>{taskInfo.detail}</div>
             </div>
           </div>
-        )}
-      </Modal>
+        </Modal>
+      )}
+      {mode === "edit" && (
+        <CreateModal
+          initialState={initialState}
+          showModal={showModal}
+          setShowModal={setShowModal}
+          addTask={addTask}
+          drivers={drivers}
+        />
+      )}
     </>
   );
 }

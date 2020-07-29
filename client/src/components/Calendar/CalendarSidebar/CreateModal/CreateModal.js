@@ -16,23 +16,27 @@ export default function CreateModal({
   showModal,
   setShowModal,
   addTask,
+  initialState,
 }) {
   const taskTypes = [
     { id: "pickup", name: "Pick up" },
     { id: "dropoff", name: "Drop off" },
     { id: "other", name: "Other" },
   ];
-  const initialState = {
-    name: "",
-    taskType: {},
-    driver: {},
-    startDay: "",
-    startHour: "",
-    endHour: "",
-    startLocation: "",
-    endLocation: "",
-    description: "",
-  };
+  // the existence of initial state means it is edit mode
+  if (!initialState) {
+    initialState = {
+      name: "",
+      taskType: {},
+      driver: {},
+      startDay: "",
+      startHour: "",
+      endHour: "",
+      startLocation: "",
+      endLocation: "",
+      description: "",
+    };
+  }
   const {
     form,
     errors,
@@ -114,7 +118,7 @@ export default function CreateModal({
           <TextInput
             placeholder="End"
             name="endLocation"
-            value={form.endhLocation}
+            value={form.endLocation}
             handleOnChange={handleOnChange}
           />
         </div>

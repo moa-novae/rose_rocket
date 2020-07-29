@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import TaskModal from "./TaskModal/TaskModal";
 import "./task.scss";
 
-export default function Task({ taskInfo }) {
+export default function Task(props) {
+  const { addTask, taskInfo, drivers } = props;
   const [showModal, setShowModal] = useState(false);
   return (
     <>
@@ -13,6 +14,8 @@ export default function Task({ taskInfo }) {
             showModal={showModal}
             setShowModal={setShowModal}
             taskInfo={taskInfo}
+            addTask={addTask}
+            drivers={drivers}
           />
 
           <div

@@ -33,7 +33,8 @@ export default function Dropdown({
   // decide what text to show in dd-header
   let titleText = title;
   if (selected.id) {
-    titleText = selected.name;
+    // if something is selected, use the selected name as title text of dd
+    titleText = list.filter((item) => item.id === selected.id)[0].name;
   }
   return (
     <>
