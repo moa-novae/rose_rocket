@@ -9,6 +9,7 @@ import "./calendar.scss";
 export default function () {
   const {
     addTask,
+    deleteTask,
     changeWeekBy,
     driversSelected,
     driversList,
@@ -30,6 +31,7 @@ export default function () {
         drivers={driversSelected}
         driversList={driversList}
         addTask={addTask}
+        deleteTask={deleteTask}
       />
     );
   });

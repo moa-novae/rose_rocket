@@ -65,9 +65,17 @@ export default function useCalendar() {
     setYearlyTasks((prev) => {
       const newTasksMap = new Map(prev);
       // it id exists, the task is edited by reusing id
-      const id = task.id ? task.id : uniqueId()
+      const id = task.id ? task.id : uniqueId();
       newTasksMap.set(id, { ...task, id });
-      console.log('map', newTasksMap)
+      console.log("map", newTasksMap);
+      return newTasksMap;
+    });
+  };
+
+  const deleteTask = function (taskId) {
+    setYearlyTasks((prev) => {
+      const newTasksMap = new Map(prev);
+      newTasksMap.delete(taskId);
       return newTasksMap;
     });
   };
@@ -149,6 +157,7 @@ export default function useCalendar() {
 
   return {
     addTask,
+    deleteTask,
     changeWeekBy,
     week,
     weeklyTasks,

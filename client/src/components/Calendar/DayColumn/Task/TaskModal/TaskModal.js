@@ -17,6 +17,7 @@ export default function TaskModal({
   setShowModal,
   drivers,
   addTask,
+  deleteTask,
 }) {
   const day = taskInfo.time.start % (24 * 7);
   const week = Math.floor(convertTime(taskInfo.time.start, "hour", "week"));
@@ -46,7 +47,10 @@ export default function TaskModal({
                   setMode("edit");
                 }}
               />
-              <FontAwesomeIcon icon={faTrashAlt} />
+              <FontAwesomeIcon
+                icon={faTrashAlt}
+                onClick={() => deleteTask(taskInfo.id)}
+              />
             </div>
             <div className="task-name">{taskInfo.name}</div>
             <div className="task-line no-icon">

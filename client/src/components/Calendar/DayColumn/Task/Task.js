@@ -3,7 +3,7 @@ import TaskModal from "./TaskModal/TaskModal";
 import "./task.scss";
 
 export default function Task(props) {
-  const { addTask, taskInfo, drivers } = props;
+  const { addTask, taskInfo, drivers, deleteTask } = props;
   const [showModal, setShowModal] = useState(false);
   return (
     <>
@@ -15,6 +15,7 @@ export default function Task(props) {
             setShowModal={setShowModal}
             taskInfo={taskInfo}
             addTask={addTask}
+            deleteTask={deleteTask}
             drivers={drivers}
           />
 
