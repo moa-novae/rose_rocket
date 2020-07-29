@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./calendarSidebar.scss";
-import Dropdown from "../../Dropdown/Dropdown";
+import DropdownMultiple from "../../Dropdown/DropdownMultiple";
 import CreateModal from "./CreateModal/CreateModal";
 export default function CalendarSidebar({ drivers, toggleDriverSelected }) {
   const [showCreateModal, setShowCreateModal] = useState(true);
@@ -15,7 +15,7 @@ export default function CalendarSidebar({ drivers, toggleDriverSelected }) {
         setShowModal={setShowCreateModal}
       />
 
-      <Dropdown
+      <DropdownMultiple
         list={drivers}
         toggle={toggleDriverSelected}
         title="Select Drivers"

@@ -7,13 +7,7 @@ import {
   faCheck,
 } from "@fortawesome/free-solid-svg-icons";
 import "./Dropdown.scss";
-export default function Dropdown({
-  title = "placeholder",
-  list = [],
-  toggle,
-  single,
-  select,
-}) {
+export default function Dropdown({ title = "none", list = [], toggle }) {
   const { listOpen, toggleList } = useDropdown();
   const ListItem = ({ item }) => (
     <button
@@ -21,11 +15,7 @@ export default function Dropdown({
       className="dd-list-item"
       key={item.id}
       onClick={() => {
-        if (single) {
-          select(item.id);
-        } else {
-          toggle(item.id);
-        }
+        toggle(item.id);
       }}
     >
       {`${item.name} `} {item.selected && <FontAwesomeIcon icon={faCheck} />}
