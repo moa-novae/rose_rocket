@@ -1,8 +1,8 @@
 import { useState } from "react";
-
-export default function useCreateModal(initialState) {
+import {convertTime} from "../../../../utils/convertTime"
+export default function useCreateModal(initialState, addTask) {
   const [form, setForm] = useState(initialState);
-  console.log("form", form);
+
   function validateOnChange(name, newValue, oldValue) {
     switch (name) {
       case "startDay":
@@ -23,7 +23,6 @@ export default function useCreateModal(initialState) {
   }
   function handleOnChange(e) {
     const { name, value } = e.target;
-    console.log("name", name, "value", value);
     setForm((prev) => ({
       ...prev,
       [name]: validateOnChange(name, value, prev[name]),
@@ -35,5 +34,39 @@ export default function useCreateModal(initialState) {
   function handleTaskTypeChange(taskType) {
     setForm((prev) => ({ ...prev, taskType }));
   }
-  return { form, handleOnChange, handleDriverChange, handleTaskTypeChange };
+
+  
+  function handleAddTask() {
+    // need to transform data so form state because task state in useCalendar
+    const {
+      name,
+      description,
+      taskType,
+      driver,
+      startLocation,
+      endLocation,
+      startDay,
+      startHour,
+      endDay,
+      endHour,
+    } = form;
+    const startTime = convertTime(startDay, "day", "hour") + startHour;
+    const endTime = convertTime(endDay, "day", "hour") + endHour;
+    const task = {
+      name: name,
+      detail: description,
+      type: taskType.id,
+      driver,
+      location: { start: startLocation, end: endLocation },
+      time: { start: startTime, end: endTime },
+    };
+    addTask(task);
+  }
+  return {
+    form,
+    handleOnChange,
+    handleDriverChange,
+    handleTaskTypeChange,
+    handleAddTask,
+  };
 }

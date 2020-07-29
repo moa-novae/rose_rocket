@@ -3,6 +3,7 @@ import "./calendarSidebar.scss";
 import DropdownMultiple from "../../Dropdown/DropdownMultiple";
 import CreateModal from "./CreateModal/CreateModal";
 export default function CalendarSidebar({
+  addTask,
   driversSelected,
   driversList,
   toggleDriverSelected,
@@ -23,6 +24,7 @@ export default function CalendarSidebar({
         showModal={showCreateModal}
         setShowModal={setShowCreateModal}
         drivers={driversList}
+        addTask={addTask}
       />
 
       <DropdownMultiple

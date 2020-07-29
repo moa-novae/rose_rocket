@@ -11,7 +11,12 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import useCreateModal from "./useCreateModal";
 import "./createModal.scss";
-export default function CreateModal({ drivers, showModal, setShowModal }) {
+export default function CreateModal({
+  drivers,
+  showModal,
+  setShowModal,
+  addTask,
+}) {
   const taskTypes = [
     { id: "pickup", name: "Pick up" },
     { id: "dropoff", name: "Drop off" },
@@ -31,10 +36,11 @@ export default function CreateModal({ drivers, showModal, setShowModal }) {
   };
   const {
     form,
+    handleAddTask,
     handleOnChange,
     handleDriverChange,
     handleTaskTypeChange,
-  } = useCreateModal(initialState);
+  } = useCreateModal(initialState, addTask);
   return (
     <Modal showModal={showModal} setShowModal={setShowModal}>
       <div className="create-modal-content-wrapper">
@@ -119,6 +125,17 @@ export default function CreateModal({ drivers, showModal, setShowModal }) {
             value={form.description}
             handleOnChange={handleOnChange}
           />
+        </div>
+        <div className="save-btn-wrapper">
+          <button
+            className="simple-btn"
+            onClick={() => {
+              handleAddTask();
+              setShowModal(false);
+            }}
+          >
+            Save
+          </button>
         </div>
       </div>
     </Modal>

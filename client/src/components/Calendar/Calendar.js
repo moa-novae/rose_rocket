@@ -8,6 +8,7 @@ import "./calendar.scss";
 
 export default function () {
   const {
+    addTask,
     changeWeekBy,
     driversSelected,
     driversList,
@@ -33,6 +34,7 @@ export default function () {
           driversSelected={driversSelected}
           driversList={driversList}
           toggleDriverSelected={toggleDriverSelected}
+          addTask={addTask}
         />
       </div>
       <div className="calendar-main">

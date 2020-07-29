@@ -60,6 +60,16 @@ export default function useCalendar() {
     ],
   ]);
   const [yearlyTasks, setYearlyTasks] = useState(initialYearTasks);
+
+  const addTask = function (task) {
+    setYearlyTasks((prev) => {
+      const newTasksMap = new Map(prev);
+      const id = uniqueId();
+      newTasksMap.set(id, { ...task, id: id });
+      return newTasksMap;
+    });
+  };
+
   const toggleDriverSelected = function (driverId) {
     setDrivers((prev) => {
       // find index of toggled driver in state array
@@ -106,7 +116,6 @@ export default function useCalendar() {
   const handleOnChange = function (e) {
     const newValue = e.target.value.trim();
     // number must be between 0-51 included
-    console.log(weekInput);
     const re = /^([0-9]|[1-4][0-9]|5[01])$/;
     setWeekInput((prev) => {
       if (re.test(newValue) || newValue === "") {
@@ -128,6 +137,7 @@ export default function useCalendar() {
   let weeklyTasks = Array.from(yearlyTasks.values()).filter((task) => {
     return Math.floor(convertTime(task.time.start, "hour", "week")) === week;
   });
+  console.log("weekly", weeklyTasks);
   //transform data to indicate day and time
   weeklyTasks = weeklyTasks.map((task) => ({
     ...task,
@@ -136,6 +146,7 @@ export default function useCalendar() {
   }));
 
   return {
+    addTask,
     changeWeekBy,
     week,
     weeklyTasks,

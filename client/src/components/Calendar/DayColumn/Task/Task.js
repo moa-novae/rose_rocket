@@ -23,7 +23,6 @@ export default function Task({ taskInfo }) {
             }}
             onClick={() => {
               setShowModal(true);
-              console.log("also");
             }}
           >
             <div className="task-name">
