@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import uniqueId from "../../utils/uniqueId";
 /*
   I couldn't find a good library that implements time on 
   a 24 h / 7 day / 52 week discrete timescale. Popular libraries 
@@ -28,7 +28,30 @@ export default function useCalendar() {
     { id: 2, name: "joe", selected: true },
   ];
   const [drivers, setDrivers] = useState(driversTemp);
-
+  // tasks of the year
+  const initialYearTasks = new Map([
+    [
+      "abcdef",
+      {
+        id: "abcdef",
+        name: "task1",
+        detail: "very cool",
+        time: { start: 100, end: 103 },
+        driver: { id: 1, name: "bob" },
+      },
+    ],
+    [
+      "fedcba",
+      {
+        id: "fedcba",
+        name: "task2",
+        detail: "super cool",
+        time: { start: 200, end: 202 },
+        driver: { id: 2, name: "joe" },
+      },
+    ],
+  ]);
+  const [yearlyTasks, setYearlyTasks] = useState(initialYearTasks);
   const toggleDriverSelected = function (driverId) {
     setDrivers((prev) => {
       // find index of toggled driver in state array
@@ -93,40 +116,16 @@ export default function useCalendar() {
     changeWeekBy(weekDifference);
   };
 
-  // temp data
-  let weeklyTasks = [];
-  if (week === 0) {
-    //api response placeholder
-    weeklyTasks = [
-      {
-        name: "task1",
-        detail: "very cool",
-        time: { start: 100, end: 103 },
-        driver: { id: 1, name: "bob" },
-      },
-    ];
-    //transform data to indicate day and time
-    weeklyTasks = weeklyTasks.map((task) => ({
-      ...task,
-      time: findDayAndHourFromTime(task.time.start),
-      duration: task.time.end - task.time.start,
-    }));
-  }
-  if (week === 1) {
-    weeklyTasks = [
-      {
-        name: "task2",
-        detail: "super cool",
-        time: { start: 200, end: 202 },
-        driver: { id: 2, name: "joe" },
-      },
-    ];
-    weeklyTasks = weeklyTasks.map((task) => ({
-      ...task,
-      time: findDayAndHourFromTime(task.time.start),
-      duration: task.time.end - task.time.start,
-    }));
-  }
+  // find the task of the week currently viewed
+  let weeklyTasks = Array.from(yearlyTasks.values()).filter((task) => {
+    return Math.floor(convertTime(task.time.start, "hour", "week")) === week;
+  });
+  //transform data to indicate day and time
+  weeklyTasks = weeklyTasks.map((task) => ({
+    ...task,
+    ...findDayAndHourFromTime(task.time.start),
+    duration: task.time.end - task.time.start,
+  }));
 
   return {
     changeWeekBy,

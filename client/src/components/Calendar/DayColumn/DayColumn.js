@@ -12,7 +12,7 @@ export default function ({ day, dailyTasks, drivers }) {
     .filter((task) =>
       drivers.some((driver) => driver.selected && driver.id === task.driver.id)
     )
-    .map((task) => <Task taskInfo={task} />);
+    .map((task) => <Task key={task.id} taskInfo={task} />);
 
   return (
     <div className="day-column">

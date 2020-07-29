@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Modal from "../../../Modal/Modal";
+import TaskModal from "./TaskModal/TaskModal";
 import "./task.scss";
 
 export default function Task({ taskInfo }) {
@@ -9,16 +9,17 @@ export default function Task({ taskInfo }) {
       {taskInfo && (
         <>
           {/* show modal of task detail if user click on task */}
-          <Modal showModal={showModal} setShowModal={setShowModal}>
-            <div>{taskInfo.name}</div>
-            <div>{taskInfo.time.hour}</div>
-          </Modal>
-          {/* task in hour block */}
+          <TaskModal
+            showModal={showModal}
+            setShowModal={setShowModal}
+            taskInfo={taskInfo}
+          />
+
           <div
             className="task"
             style={{
               height: `${3 * taskInfo.duration}em`,
-              top: `${3 * taskInfo.time.hour}em`,
+              top: `${3 * taskInfo.hour}em`,
             }}
             onClick={() => {
               setShowModal(true);
