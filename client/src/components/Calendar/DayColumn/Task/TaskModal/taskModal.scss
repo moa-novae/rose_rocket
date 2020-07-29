@@ -2,6 +2,12 @@
   display: flex;
   flex-direction: column;
   padding: 1em 2em 2em 2em;
+  .action-wrapper {
+    display: flex;
+    width: 15%;
+    align-self: flex-end;
+    justify-content: space-between;
+  }
   .task-name {
     font-size: 1.3rem;
   }
