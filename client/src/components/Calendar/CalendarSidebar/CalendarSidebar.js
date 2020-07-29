@@ -10,9 +10,14 @@ export default function CalendarSidebar({
   const [showCreateModal, setShowCreateModal] = useState(true);
   return (
     <div className="calendar-sidebar-content">
-      <button className="new-task-btn" onClick={() => setShowCreateModal(true)}>
-        Create Task
-      </button>
+      <div className="new-task-btn-wrapper">
+        <button
+          className="new-task-btn simple-btn"
+          onClick={() => setShowCreateModal(true)}
+        >
+          Create Task
+        </button>
+      </div>
 
       <CreateModal
         showModal={showCreateModal}

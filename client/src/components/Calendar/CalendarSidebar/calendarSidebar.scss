@@ -1,18 +1,17 @@
+@import "../../../styles/btn.scss";
+
 .calendar-sidebar-content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  .new-task-btn {
+  .new-task-btn-wrapper {
     font-size: 0.8em;
     width: 10em;
     height: 4em;
-    padding: 0.7em 1.2em;
-    background: linear-gradient(to right, #69ff97 10%, #00e4ff 100%) left bottom
-      no-repeat;
-    background-size: 100% 5px;
-    // remove default border
-    border: 0;
-    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.14),
-      0 2px 1px -1px rgba(0, 0, 0, 0.12), 0 1px 3px 0 rgba(0, 0, 0, 0.2);
+    .new-task-btn {
+      background: linear-gradient(to right, #69ff97 10%, #00e4ff 100%) left
+        bottom no-repeat;
+      background-size: 100% 5px;
+    }
   }
 }
