@@ -11,8 +11,6 @@
   z-index: 100;
   width: 10em;
   margin: 2em 1em;
-  display: flex;
-  flex-direction: column;
   .dd-header {
     width: 100%;
     display: flex;
@@ -29,6 +27,8 @@
     }
   }
   .dd-list {
+    position: absolute;
+    top: 100%;
     box-sizing: border-box;
     overflow-y: scroll;
     width: 100%;

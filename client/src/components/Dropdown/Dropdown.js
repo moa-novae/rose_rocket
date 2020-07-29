@@ -9,7 +9,7 @@ import {
 import "./Dropdown.scss";
 export default function Dropdown({
   title = "placeholder",
-  list,
+  list = [],
   toggle,
   single,
   select,
