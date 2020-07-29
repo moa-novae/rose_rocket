@@ -12,7 +12,7 @@ import {
 import useCreateModal from "./useCreateModal";
 import "./createModal.scss";
 export default function CreateModal({
-  drivers,
+  driversList,
   showModal,
   setShowModal,
   addTask,
@@ -74,7 +74,7 @@ export default function CreateModal({
           <FontAwesomeIcon icon={faTruckMoving} />
 
           <DropdownSingle
-            list={drivers}
+            list={driversList}
             title="Driver"
             selected={form.driver}
             select={handleDriverChange}

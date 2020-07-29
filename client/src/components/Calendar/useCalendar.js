@@ -27,10 +27,10 @@ export default function useCalendar() {
     { id: 1, name: "bob", selected: true },
     { id: 2, name: "joe", selected: true },
   ];
-  // driversSelected state keep track of which driver selected to view in calendar
+  // driversSelected state keeps track of which driver is selected and shows on calendar
   const [driversSelected, setDrivers] = useState(driversTemp);
-  // remove selected attribute to form driversList
-  // it will used for creating new tasks
+  // remove selected property to form driversList
+  // it will used for creating new tasks and keep track of who are all the drivers
   const driversList = driversSelected.map(({ id, name }) => ({ id, name }));
   // tasks of the year
   const initialYearTasks = new Map([
@@ -39,7 +39,7 @@ export default function useCalendar() {
       {
         id: "abcdef",
         name: "task1",
-        detail: "very cool",
+        description: "very cool",
         type: "pickup",
         time: { start: 100, end: 103 },
         driver: { id: 1, name: "bob" },
@@ -51,7 +51,7 @@ export default function useCalendar() {
       {
         id: "fedcba",
         name: "task2",
-        detail: "super cool",
+        description: "super cool",
         type: "dropoff",
         time: { start: 200, end: 202 },
         driver: { id: 2, name: "joe" },

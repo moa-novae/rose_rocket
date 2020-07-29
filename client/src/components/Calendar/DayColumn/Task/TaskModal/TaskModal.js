@@ -15,7 +15,7 @@ export default function TaskModal({
   taskInfo,
   showModal,
   setShowModal,
-  drivers,
+  driversList,
   addTask,
   deleteTask,
 }) {
@@ -32,7 +32,7 @@ export default function TaskModal({
     endHour: taskInfo.time.end % 24,
     startLocation: taskInfo.location.start,
     endLocation: taskInfo.location.finish,
-    description: taskInfo.detail,
+    description: taskInfo.description,
   };
   const [mode, setMode] = useState("view");
   return (
@@ -78,7 +78,7 @@ export default function TaskModal({
               </div>
             </div>
             <div className="task-line no-icon">
-              <div>{taskInfo.detail}</div>
+              <div>{taskInfo.description}</div>
             </div>
           </div>
         </Modal>
@@ -89,7 +89,7 @@ export default function TaskModal({
           showModal={showModal}
           setShowModal={setShowModal}
           addTask={addTask}
-          drivers={drivers}
+          driversList={driversList}
         />
       )}
     </>

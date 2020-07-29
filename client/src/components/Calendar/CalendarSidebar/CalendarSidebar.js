@@ -2,12 +2,8 @@ import React, { useState } from "react";
 import "./calendarSidebar.scss";
 import DropdownMultiple from "../../Dropdown/DropdownMultiple";
 import CreateModal from "./CreateModal/CreateModal";
-export default function CalendarSidebar({
-  addTask,
-  driversSelected,
-  driversList,
-  toggleDriverSelected,
-}) {
+export default function CalendarSidebar(props) {
+  const { addTask, driversSelected, driversList, toggleDriverSelected } = props;
   const [showCreateModal, setShowCreateModal] = useState(false);
   return (
     <div className="calendar-sidebar-content">
@@ -23,7 +19,7 @@ export default function CalendarSidebar({
       <CreateModal
         showModal={showCreateModal}
         setShowModal={setShowCreateModal}
-        drivers={driversList}
+        driversList={driversList}
         addTask={addTask}
       />
 

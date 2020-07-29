@@ -100,7 +100,7 @@ export default function useCreateModal(initialState, addTask, setShowModal) {
     const endTime = day + parseInt(endHour);
     const task = {
       name: name,
-      detail: description,
+      description,
       type: taskType.id,
       driver,
       location: { start: startLocation, end: endLocation },

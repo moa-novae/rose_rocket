@@ -23,7 +23,7 @@ export default function ({
       <Task
         key={task.id}
         taskInfo={task}
-        drivers={driversList}
+        driversList={driversList}
         addTask={addTask}
         deleteTask={deleteTask}
       />
