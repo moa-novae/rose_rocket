@@ -7,19 +7,42 @@ import {
   faCheck,
 } from "@fortawesome/free-solid-svg-icons";
 import "./Dropdown.scss";
-export default function Dropdown({ title = "placeholder", list, toggle }) {
+export default function Dropdown({
+  title = "placeholder",
+  list,
+  toggle,
+  single,
+  select,
+}) {
   const { listOpen, toggleList } = useDropdown();
   const ListItem = ({ item }) => (
     <button
       type="button"
       className="dd-list-item"
       key={item.id}
-      onClick={() => toggle(item.id)}
+      onClick={() => {
+        if (single) {
+          select(item.id);
+        } else {
+          toggle(item.id);
+        }
+      }}
     >
       {`${item.name} `} {item.selected && <FontAwesomeIcon icon={faCheck} />}
     </button>
   );
   const listItems = list.map((item) => <ListItem item={item} />);
+  const selectedItemsCount = list.reduce(
+    (accu, item) => (item.selected ? accu + 1 : accu),
+    0
+  );
+  // decide what text to show in dd-header
+  let titleText = title;
+  if (selectedItemsCount === 1) {
+    titleText = list.filter((item) => item.selected)[0].name;
+  } else if (selectedItemsCount > 1) {
+    titleText = "Multiple Selected";
+  }
   return (
     <>
       {/* when list open, show transparent backdrop under dd that closes dd when clicked on  */}
@@ -30,7 +53,7 @@ export default function Dropdown({ title = "placeholder", list, toggle }) {
           className="dd-header"
           onClick={() => toggleList()}
         >
-          <div className="dd-header-title">{title}</div>
+          <div className="dd-header-title">{titleText}</div>
           {listOpen ? (
             <FontAwesomeIcon icon={faChevronUp} />
           ) : (
