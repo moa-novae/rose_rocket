@@ -27,7 +27,11 @@ export default function useCalendar() {
     { id: 1, name: "bob", selected: true },
     { id: 2, name: "joe", selected: true },
   ];
-  const [drivers, setDrivers] = useState(driversTemp);
+  // driversSelected state keep track of which driver selected to view in calendar
+  const [driversSelected, setDrivers] = useState(driversTemp);
+  // remove selected attribute to form driversList
+  // it will used for creating new tasks
+  const driversList = driversSelected.map(({ id, name }) => ({ id, name }));
   // tasks of the year
   const initialYearTasks = new Map([
     [
@@ -138,7 +142,8 @@ export default function useCalendar() {
     weekInput,
     handleOnChange,
     handleWeekJump,
-    drivers,
+    driversSelected,
+    driversList,
     toggleDriverSelected,
   };
 }

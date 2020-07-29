@@ -9,7 +9,8 @@ import "./calendar.scss";
 export default function () {
   const {
     changeWeekBy,
-    drivers,
+    driversSelected,
+    driversList,
     week,
     weeklyTasks,
     weekInput,
@@ -21,13 +22,16 @@ export default function () {
   //task of each day is passed to each DayColumn
   const dayColumns = days.map((day, i) => {
     const dailyTasks = weeklyTasks.filter((task) => task.day === i);
-    return <DayColumn day={day} dailyTasks={dailyTasks} drivers={drivers} />;
+    return (
+      <DayColumn day={day} dailyTasks={dailyTasks} drivers={driversSelected} />
+    );
   });
   return (
     <div className="calendar">
       <div className="calendar-sidebar">
         <CalendarSidebar
-          drivers={drivers}
+          driversSelected={driversSelected}
+          driversList={driversList}
           toggleDriverSelected={toggleDriverSelected}
         />
       </div>

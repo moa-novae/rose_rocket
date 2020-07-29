@@ -20,18 +20,20 @@ export default function Dropdown({
       className="dd-list-item"
       key={item.id}
       onClick={() => {
-        select(item.id);
+        select({ id: item.id, name: item.name });
+        toggleList();
       }}
     >
-      {`${item.name} `} {selected && <FontAwesomeIcon icon={faCheck} />}
+      {`${item.name} `}{" "}
+      {selected.id === item.id && <FontAwesomeIcon icon={faCheck} />}
     </button>
   );
   const listItems = list.map((item) => <ListItem item={item} />);
 
   // decide what text to show in dd-header
   let titleText = title;
-  if (selected) {
-    titleText = selected;
+  if (selected.id) {
+    titleText = selected.name;
   }
   return (
     <>
@@ -50,7 +52,7 @@ export default function Dropdown({
             <FontAwesomeIcon icon={faChevronDown} />
           )}
         </button>
-
+        {/* show list of items when list open */}
         {listOpen && (
           <div role="list" className="dd-list">
             <div className="dd-scroll-list">{listItems}</div>

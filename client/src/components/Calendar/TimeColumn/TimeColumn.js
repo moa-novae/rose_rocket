@@ -2,7 +2,7 @@ import React from "react";
 import "./timeColumn.scss";
 export default function TimeColumn() {
   // hours = [1, 2, ... 24]
-  const hours = Array.from(Array(24), (_, i) => i + 1);
+  const hours = Array.from(Array(24), (_, i) => i);
   return (
     <div className="time-column">
       <div className="time-column-header"></div>
