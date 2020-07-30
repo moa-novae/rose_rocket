@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import uniqueId from "../../utils/uniqueId";
 /*
   I couldn't find a good library that implements time on 
@@ -83,7 +83,7 @@ export default function useCalendar() {
 
   const checkTimeConflict = function (newTask, yearlyTasks) {
     const conflictedTasks = [];
-    for (const [id, existingTask] of yearlyTasks) {
+    for (const [, existingTask] of yearlyTasks) {
       // if different drivers, pass
 
       if (existingTask.driver.id !== newTask.driver.id) {

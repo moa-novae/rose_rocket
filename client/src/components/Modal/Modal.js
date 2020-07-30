@@ -16,7 +16,7 @@ export default function Modal({
         handleOnClose();
       }
     }
-  }, [showModal]);
+  }, [showModal, handleOnClose]);
   return (
     // only show modal if showModal === true
     <>

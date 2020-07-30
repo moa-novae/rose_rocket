@@ -20,6 +20,7 @@ export default function ({
   const visibleTasks = dailyTasks.filter((task) =>
     drivers.some((driver) => driver.selected && driver.id === task.driver.id)
   );
+  // not if this is more efficient for finding overlapping tasks or dom ref is better
   const overlappingTaskIds = findOverlappingTasks(visibleTasks);
 
   const tasks = visibleTasks.map((task) => (
