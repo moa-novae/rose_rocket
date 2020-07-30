@@ -21,7 +21,9 @@ export default function Task(props) {
   if (overlap) {
     lane = driverIndex + 1;
   }
+  // each driver has own bg colour for task
   const taskBgColour = driversList[driverIndex].colour;
+  // choose font colour dynamically depending on bg
   const taskFontColour =
     bgBrightness(taskBgColour) === "bright" ? "#3c4043" : "#fafafa";
   console.log(taskFontColour);
