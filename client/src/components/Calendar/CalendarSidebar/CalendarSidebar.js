@@ -3,7 +3,13 @@ import "./calendarSidebar.scss";
 import DropdownMultiple from "../../Dropdown/DropdownMultiple";
 import CreateModal from "./CreateModal/CreateModal";
 export default function CalendarSidebar(props) {
-  const { addTask, driversSelected, driversList, toggleDriverSelected , addAndDeleteTask} = props;
+  const {
+    addTask,
+    driversSelected,
+    driversList,
+    toggleDriverSelected,
+    addAndDeleteTask,
+  } = props;
   const [showCreateModal, setShowCreateModal] = useState(false);
   return (
     <div className="calendar-sidebar-content">
@@ -15,6 +21,13 @@ export default function CalendarSidebar(props) {
           Create Task
         </button>
       </div>
+      <div className="driver-selection-wrapper">
+        <DropdownMultiple
+          list={driversSelected}
+          toggle={toggleDriverSelected}
+          title="Select Drivers"
+        />
+      </div>
 
       <CreateModal
         showModal={showCreateModal}
@@ -22,12 +35,6 @@ export default function CalendarSidebar(props) {
         driversList={driversList}
         addTask={addTask}
         addAndDeleteTask={addAndDeleteTask}
-      />
-
-      <DropdownMultiple
-        list={driversSelected}
-        toggle={toggleDriverSelected}
-        title="Select Drivers"
       />
     </div>
   );
