@@ -29,7 +29,11 @@ export default function useCalendar() {
   const [driversSelected, setDrivers] = useState(initialDrivers);
   // remove selected property to form driversList
   // it will used for creating new tasks and keep track of who are all the drivers
-  const driversList = driversSelected.map(({ id, name }) => ({ id, name }));
+  const driversList = driversSelected.map(({ id, name, colour }) => ({
+    id,
+    name,
+    colour,
+  }));
   // tasks of the year
   const [yearlyTasks, setYearlyTasks] = useState(initialYearTasks);
 
@@ -201,8 +205,8 @@ export default function useCalendar() {
 
   return {
     addTask,
-    deleteTask,
     addAndDeleteTask,
+    deleteTask,
     changeWeekBy,
     week,
     weeklyTasks,

@@ -9,8 +9,8 @@ import "./calendar.scss";
 export default function () {
   const {
     addTask,
-    deleteTask,
     addAndDeleteTask,
+    deleteTask,
     changeWeekBy,
     driversSelected,
     driversList,
@@ -30,7 +30,7 @@ export default function () {
       <DayColumn
         day={day}
         dailyTasks={dailyTasks}
-        drivers={driversSelected}
+        driversSelected={driversSelected}
         driversList={driversList}
         addTask={addTask}
         deleteTask={deleteTask}

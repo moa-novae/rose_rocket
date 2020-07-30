@@ -6,7 +6,7 @@ import findOverlappingTasks from "../../../utils/findOverlappingTasks";
 export default function ({
   day,
   dailyTasks,
-  drivers,
+  driversSelected,
   driversList,
   addTask,
   deleteTask,
@@ -18,9 +18,10 @@ export default function ({
 
   // the filter allows tasks that have drivers selected to show up
   const visibleTasks = dailyTasks.filter((task) =>
-    drivers.some((driver) => driver.selected && driver.id === task.driver.id)
+    driversSelected.some((driver) => driver.selected && driver.id === task.driver.id)
   );
-  // not if this is more efficient for finding overlapping tasks or dom ref is better
+  // not sure if this is more efficient for finding overlapping tasks or dom ref is better
+  // find overlapping tasks and style them differently
   const overlappingTaskIds = findOverlappingTasks(visibleTasks);
 
   const tasks = visibleTasks.map((task) => (

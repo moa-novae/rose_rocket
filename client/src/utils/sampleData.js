@@ -1,7 +1,7 @@
 export const initialDrivers = [
-  { id: 1, name: "Darius the Great", selected: true },
-  { id: 2, name: "Ivan the Terrible", selected: true },
-  { id: 3, name: "Richard the Lionheart", selected: true },
+  { id: 1, name: "Darius the Great", selected: true, colour: "#B8EBD0" },
+  { id: 2, name: "Ivan the Terrible", selected: true, colour: "#084887" },
+  { id: 3, name: "Richard the Lionheart", selected: true, colour: "#909CC2" },
 ];
 export const initialYearTasks = new Map([
   [
