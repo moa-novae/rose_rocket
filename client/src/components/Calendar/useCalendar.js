@@ -83,7 +83,7 @@ export default function useCalendar() {
     );
   };
 
-  const checkTimeConflict = function (newTask) {
+  const checkTimeConflict = function (newTask, yearlyTasks) {
     const conflictedTasks = [];
     for (const [id, existingTask] of yearlyTasks) {
       // if different drivers, pass
@@ -119,7 +119,7 @@ export default function useCalendar() {
   };
   // maybe refactoring this to promise based would be more readable
   const addTask = function (task) {
-    const conflictedTasks = checkTimeConflict(task);
+    const conflictedTasks = checkTimeConflict(task, yearlyTasks);
     if (!conflictedTasks.length) {
       setYearlyTasks((prev) => {
         const newTasksMap = new Map(prev);
@@ -147,15 +147,24 @@ export default function useCalendar() {
   task state, therefore causing checkTimeConflict, which is called by 
   addTask, to stop any updates to the task state */
   const addAndDeleteTask = function (taskToBeAdded, ...taskToBeDeleted) {
+    let conflictedTasks = [];
     setYearlyTasks((prev) => {
       const newTasksMap = new Map(prev);
       taskToBeDeleted.forEach((taskId) => {
         newTasksMap.delete(taskId);
       });
       const id = taskToBeAdded.id ? taskToBeAdded.id : uniqueId();
-      newTasksMap.set(id, { ...taskToBeAdded, id });
-      return newTasksMap;
+      conflictedTasks = checkTimeConflict(taskToBeAdded, newTasksMap);
+      // handles edge case where adjusted position after resolving conflict also causes conflict
+      if (!conflictedTasks.length) {
+        newTasksMap.set(id, { ...taskToBeAdded, id });
+        return newTasksMap;
+      } else {
+        // if new conflict found, return old state
+        return new Map(prev);
+      }
     });
+    return conflictedTasks;
   };
 
   const toggleDriverSelected = function (driverId) {

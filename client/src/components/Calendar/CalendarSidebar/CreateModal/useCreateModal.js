@@ -22,8 +22,13 @@ export default function useCreateModal(
     if (!form.driver.id) {
       newError.driver = "A driver must be selected";
     }
-    if (!form.startDay || !form.startHour || !form.endHour) {
-      newError.time = "Please enter a complete time";
+    if (
+      !form.startDay ||
+      !form.startHour ||
+      !form.endHour ||
+      form.endHour < form.startHour
+    ) {
+      newError.time = "Please enter a valid time";
     }
     return newError;
   }
@@ -42,35 +47,16 @@ export default function useCreateModal(
         }
         return oldState[name];
       case "startHour":
-        if (newValue === "") {
-          return newValue;
-        }
-        // check if valid hour 0 - 23
-        if (validHour.test(newValue)) {
-          // check if startHour less than endHour
-          if (
-            parseInt(newValue) < parseInt(oldState.endHour) ||
-            !oldState.endHour
-          ) {
-            return newValue;
-          }
-        }
-        return oldState[name];
       case "endHour":
         if (newValue === "") {
           return newValue;
         }
         // check if valid hour 0 - 23
         if (validHour.test(newValue)) {
-          // check if endHour less than startHour
-          if (
-            parseInt(newValue) > parseInt(oldState.startHour) ||
-            !oldState.startHour
-          ) {
-            return newValue;
-          }
+          return newValue;
         }
         return oldState[name];
+
       default:
         return newValue;
     }
@@ -112,7 +98,7 @@ export default function useCreateModal(
       type: taskType.id,
       driver,
       location: { start: startLocation, end: endLocation },
-      time: { start: startTime, end: endTime },
+      time: { start: parseInt(startTime), end: parseInt(endTime) },
     };
     return task;
   }
@@ -137,37 +123,38 @@ export default function useCreateModal(
   }
 
   function handlePlaceAroundConflict(place) {
-    let newEndTime;
-    let newStartTime;
-    const taskDuration = form.endHour - form.startHour;
-    if (place === "before") {
-      // element at conflictedTasks[0] is the earliest conflict
-      newEndTime = conflictedTasks[0].time.start;
-      newStartTime = newEndTime - taskDuration;
-    } else if (place === "after") {
-      // sort task with the latest end time to index 0
-      newStartTime = conflictedTasks.sort((a, b) => b.time.end - a.time.end)[0]
-        .time.end;
-      newEndTime = newStartTime + taskDuration;
+    let localConflictedTasks = [...conflictedTasks];
+    let task = transformFormToTaskShape(form);
+    const taskDuration = task.time.end - task.time.start;
+    // every loop, a conflict free slot is proposed based on immediate conflicts
+    // if there is still conflict at the new slot, repeat
+    while (
+      localConflictedTasks.length ||
+      task.time.start % 24 > task.time.end % 24
+    ) {
+      if (place === "before") {
+        // element at conflictedTasks[0] is the earliest conflict
+        task.time.end = localConflictedTasks[0].time.start;
+        task.time.start = task.time.end - taskDuration;
+      } else if (place === "after") {
+        // sort task with the latest end time to index 0
+        task.time.start = localConflictedTasks.sort(
+          (a, b) => b.time.end - a.time.end
+        )[0].time.end;
+        task.time.end = task.time.start + taskDuration;
+      }
+
+      // first parameter is task to be added, rest are to be deleted
+      // the task itself need to be deleted in case of edits to stop false conflicts
+      // keep checking for free space until no conflict and task not over night
+      localConflictedTasks = addAndDeleteTask(task, task.id);
     }
-    // convert time (in hours) to time of day (ex: 6:00)
-    const newEndHour = newEndTime % 24;
-    const newStartHour = newStartTime % 24;
-    const conflictResolvedForm = {
-      ...form,
-      startHour: newStartHour,
-      endHour: newEndHour,
-    };
-    const task = transformFormToTaskShape(conflictResolvedForm);
-    // first parameter is task to be added, rest are to be deleted
-    addAndDeleteTask(task, task.id);
     setShowModal(false);
     setShowConflictOptions(false);
     setForm(initialState);
   }
 
   function handleOverrideConflict() {
-    console.log("conflicted tasks", conflictedTasks);
     const task = transformFormToTaskShape(form);
     addAndDeleteTask(task, ...conflictedTasks.map((task) => task.id));
     setShowModal(false);
