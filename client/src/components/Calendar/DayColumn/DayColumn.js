@@ -15,7 +15,7 @@ export default function ({
   // each HourBlock is assigned an hour
   const hourBlocks = Array(24).fill(<HourBlock />);
 
-  // only allows tasks that have drivers selected to show up
+  // the filter allows tasks that have drivers selected to show up
   const tasks = dailyTasks
     .filter((task) =>
       drivers.some((driver) => driver.selected && driver.id === task.driver.id)

@@ -75,11 +75,9 @@ export default function useCalendar() {
 
   // sort yearlyTasks to find conflicting tasks easier
   // sorted from earliest to latest
-  const sortTasks = function () {
+  const sortTasks = function (taskMap) {
     return new Map(
-      [...yearlyTasks.entries()].sort(
-        (a, b) => a[1].time.start - b[1].time.start
-      )
+      [...taskMap.entries()].sort((a, b) => a[1].time.start - b[1].time.start)
     );
   };
 
@@ -126,7 +124,7 @@ export default function useCalendar() {
         // if id exists, the task is edited by reusing id
         const id = task.id ? task.id : uniqueId();
         newTasksMap.set(id, { ...task, id });
-        return newTasksMap;
+        return sortTasks(newTasksMap);
       });
     } else {
       return conflictedTasks;
@@ -158,7 +156,7 @@ export default function useCalendar() {
       // handles edge case where adjusted position after resolving conflict also causes conflict
       if (!conflictedTasks.length) {
         newTasksMap.set(id, { ...taskToBeAdded, id });
-        return newTasksMap;
+        return sortTasks(newTasksMap);
       } else {
         // if new conflict found, return old state
         return new Map(prev);
