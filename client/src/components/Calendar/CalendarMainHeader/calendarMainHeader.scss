@@ -1,7 +1,7 @@
 .calendar-header {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   width: 100%;
   .calendar-header-left {
@@ -21,7 +21,7 @@
     }
   }
   .calendar-header-right {
-    margin: 1em;
+    margin: 1em 10% 1em 1em;
     input {
       margin: 0 1em;
       width: 4em;

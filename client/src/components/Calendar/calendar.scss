@@ -1,10 +1,11 @@
 .calendar {
   display: grid;
-  grid-template-columns: minmax(300px, 15%) 1fr;
+  grid-template-columns: minmax(400px, 20%) 1fr;
   margin: 1em 0;
   color: #3c4043;
   .calendar-sidebar {
     grid-column: 1;
+    padding-left: 10%;
   }
   .calendar-main {
     display: flex;
