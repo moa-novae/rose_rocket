@@ -28,7 +28,7 @@ export default function Dropdown({
       {selected.id === item.id && <FontAwesomeIcon icon={faCheck} />}
     </button>
   );
-  const listItems = list.map((item) => <ListItem item={item} />);
+  const listItems = list.map((item) => <ListItem item={item} key={item.id} />);
 
   // decide what text to show in dd-header
   let titleText = title;

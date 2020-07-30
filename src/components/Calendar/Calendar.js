@@ -29,6 +29,7 @@ export default function () {
     return (
       <DayColumn
         day={day}
+        key={day}
         dailyTasks={dailyTasks}
         driversSelected={driversSelected}
         driversList={driversList}

@@ -14,11 +14,13 @@ export default function ({
 }) {
   // add 24 HourBlocks to each DayColumn
   // each HourBlock is assigned an hour
-  const hourBlocks = Array(24).fill(<HourBlock />);
+  const hourBlocks = Array.from(Array(24), (_, i) => <HourBlock key={i} />);
 
   // the filter allows tasks that have drivers selected to show up
   const visibleTasks = dailyTasks.filter((task) =>
-    driversSelected.some((driver) => driver.selected && driver.id === task.driver.id)
+    driversSelected.some(
+      (driver) => driver.selected && driver.id === task.driver.id
+    )
   );
   // not sure if this is more efficient for finding overlapping tasks or dom ref is better
   // find overlapping tasks and style them differently
