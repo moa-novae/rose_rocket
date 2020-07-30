@@ -1,5 +1,6 @@
 import { useState } from "react";
 import uniqueId from "../../utils/uniqueId";
+import { initialDrivers, initialYearTasks } from "../../utils/sampleData";
 /*
   I couldn't find a good library that implements time on 
   a 24 h / 7 day / 52 week discrete timescale. Popular libraries 
@@ -23,54 +24,13 @@ export default function useCalendar() {
   const [weekInput, setWeekInput] = useState(calendarTime);
   // keep track of which drivers fall under the dispatcher each year
   // and whether they are shown on the calendar
-  const driversTemp = [
-    { id: 1, name: "bob", selected: true },
-    { id: 2, name: "joe", selected: true },
-  ];
+
   // driversSelected state keeps track of which driver is selected and shows on calendar
-  const [driversSelected, setDrivers] = useState(driversTemp);
+  const [driversSelected, setDrivers] = useState(initialDrivers);
   // remove selected property to form driversList
   // it will used for creating new tasks and keep track of who are all the drivers
   const driversList = driversSelected.map(({ id, name }) => ({ id, name }));
   // tasks of the year
-  const initialYearTasks = new Map([
-    [
-      "abcdef",
-      {
-        id: "abcdef",
-        name: "task1",
-        description: "very cool",
-        type: "pickup",
-        time: { start: 100, end: 103 },
-        driver: { id: 1, name: "bob" },
-        location: { start: "a", finish: "b" },
-      },
-    ],
-    [
-      "abdef",
-      {
-        id: "abdef",
-        name: "new",
-        description: "very cool",
-        type: "pickup",
-        time: { start: 103, end: 104 },
-        driver: { id: 1, name: "bob" },
-        location: { start: "a", finish: "b" },
-      },
-    ],
-    [
-      "fedcba",
-      {
-        id: "fedcba",
-        name: "task2",
-        description: "super cool",
-        type: "dropoff",
-        time: { start: 200, end: 202 },
-        driver: { id: 2, name: "joe" },
-        location: { start: "c", finish: "d" },
-      },
-    ],
-  ]);
   const [yearlyTasks, setYearlyTasks] = useState(initialYearTasks);
 
   // function ensures yearlyTasks is always sorted from earliest to latest
