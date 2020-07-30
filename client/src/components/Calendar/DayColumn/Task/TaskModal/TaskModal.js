@@ -18,12 +18,16 @@ export default function TaskModal({
   driversList,
   addTask,
   deleteTask,
+  addAndDeleteTask,
 }) {
+  // transform time into human readable day and hour
   const day = taskInfo.time.start % (24 * 7);
   const week = Math.floor(convertTime(taskInfo.time.start, "hour", "week"));
   const startHour = taskInfo.time.start % 24;
   const endHour = taskInfo.time.end % 24;
+  // massage taskInfo prop into the correct form state shape and pass as initial state
   const initialState = {
+    id: taskInfo.id,
     name: taskInfo.name,
     taskType: { id: taskInfo.type },
     driver: { id: taskInfo.driver.id },
@@ -38,7 +42,11 @@ export default function TaskModal({
   return (
     <>
       {mode === "view" && (
-        <Modal showModal={showModal} setShowModal={setShowModal}>
+        <Modal
+          showModal={showModal}
+          setShowModal={setShowModal}
+          handleOnClose={() => setMode("view")}
+        >
           <div className="task-wrapper">
             <div className="action-wrapper">
               <FontAwesomeIcon
@@ -74,7 +82,7 @@ export default function TaskModal({
               <FontAwesomeIcon icon={faMapMarkerAlt} />
 
               <div>
-                {`From ${taskInfo.location.start} to ${taskInfo.location.finish}`}{" "}
+                {`From ${taskInfo.location.start} to ${taskInfo.location.finish}`}
               </div>
             </div>
             <div className="task-line no-icon">
@@ -89,7 +97,10 @@ export default function TaskModal({
           showModal={showModal}
           setShowModal={setShowModal}
           addTask={addTask}
+          deleteTask={deleteTask}
+          addAndDeleteTask={addAndDeleteTask}
           driversList={driversList}
+          handleOnClose={() => setMode("view")}
         />
       )}
     </>

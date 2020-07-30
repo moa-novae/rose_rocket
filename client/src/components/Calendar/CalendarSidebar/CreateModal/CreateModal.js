@@ -16,7 +16,10 @@ export default function CreateModal({
   showModal,
   setShowModal,
   addTask,
+  deleteTask,
+  addAndDeleteTask,
   initialState,
+  handleOnClose,
 }) {
   const taskTypes = [
     { id: "pickup", name: "Pick up" },
@@ -38,15 +41,29 @@ export default function CreateModal({
     };
   }
   const {
+    showConflictOptions,
     form,
     errors,
+    closeConflictOptions,
     handleSubmit,
     handleOnChange,
     handleDriverChange,
     handleTaskTypeChange,
-  } = useCreateModal(initialState, addTask, setShowModal);
+    handlePlaceAroundConflict,
+    handleOverrideConflict,
+  } = useCreateModal(
+    initialState,
+    addTask,
+    deleteTask,
+    addAndDeleteTask,
+    setShowModal
+  );
   return (
-    <Modal showModal={showModal} setShowModal={setShowModal}>
+    <Modal
+      showModal={showModal}
+      setShowModal={setShowModal}
+      handleOnClose={handleOnClose}
+    >
       <div className="create-modal-content-wrapper">
         <div className="create-modal-first">
           <div className="task-name-input-wrapper">
@@ -130,11 +147,41 @@ export default function CreateModal({
             handleOnChange={handleOnChange}
           />
         </div>
-        <div className="save-btn-wrapper">
-          <button className="simple-btn" onClick={handleSubmit}>
-            Save
-          </button>
-        </div>
+        {!showConflictOptions && (
+          <div className="save-btn-wrapper">
+            <button className="simple-btn save-btn" onClick={handleSubmit}>
+              Save
+            </button>
+          </div>
+        )}
+        {showConflictOptions && (
+          <div className="conflicted-options-wrapper">
+            <button
+              className="simple-btn override-btn"
+              onClick={handleOverrideConflict}
+            >
+              Override Conflict
+            </button>
+            <button
+              className="simple-btn gentle-btn"
+              onClick={() => handlePlaceAroundConflict("before")}
+            >
+              Place Before Conflict
+            </button>
+            <button
+              className="simple-btn gentle-btn"
+              onClick={() => handlePlaceAroundConflict("after")}
+            >
+              Place After Conflict
+            </button>
+            <button
+              className="simple-btn cancel-btn"
+              onClick={closeConflictOptions}
+            >
+              Cancel
+            </button>
+          </div>
+        )}
       </div>
     </Modal>
   );

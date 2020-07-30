@@ -3,7 +3,7 @@ import TaskModal from "./TaskModal/TaskModal";
 import "./task.scss";
 
 export default function Task(props) {
-  const { addTask, taskInfo, driversList, deleteTask } = props;
+  const { addTask, taskInfo, driversList, deleteTask, addAndDeleteTask} = props;
   const [showModal, setShowModal] = useState(false);
   return (
     <>
@@ -16,14 +16,16 @@ export default function Task(props) {
             taskInfo={taskInfo}
             addTask={addTask}
             deleteTask={deleteTask}
+            addAndDeleteTask={addAndDeleteTask}
             driversList={driversList}
           />
 
           <div
             className="task"
+            // -0.1 and +0.05 allows sliver of space between connective tasks
             style={{
-              height: `${3 * taskInfo.duration}em`,
-              top: `${3 * taskInfo.hour}em`,
+              height: `${3 * taskInfo.duration - 0.1}em`,
+              top: `${3 * taskInfo.hour + 0.05}em`,
             }}
             onClick={() => {
               setShowModal(true);

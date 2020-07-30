@@ -1,9 +1,16 @@
 import { useState } from "react";
 import { convertTime } from "../../../../utils/convertTime";
-export default function useCreateModal(initialState, addTask, setShowModal) {
+export default function useCreateModal(
+  initialState,
+  addTask,
+  deleteTask,
+  addAndDeleteTask,
+  setShowModal
+) {
   const [form, setForm] = useState(initialState);
   const [errors, setError] = useState({});
-
+  const [showConflictOptions, setShowConflictOptions] = useState(false);
+  const [conflictedTasks, setConflictedTasks] = useState([]);
   function validateSubmit(form) {
     let newError = {};
     if (!form.name) {
@@ -82,8 +89,7 @@ export default function useCreateModal(initialState, addTask, setShowModal) {
     setForm((prev) => ({ ...prev, taskType }));
   }
 
-  function handleAddTask() {
-    // need to transform data so form state because task state in useCalendar
+  function transformFormToTaskShape(form) {
     const {
       name,
       description,
@@ -94,11 +100,13 @@ export default function useCreateModal(initialState, addTask, setShowModal) {
       startDay,
       startHour,
       endHour,
+      id,
     } = form;
     const day = convertTime(startDay, "day", "hour");
     const startTime = day + parseInt(startHour);
     const endTime = day + parseInt(endHour);
     const task = {
+      id,
       name: name,
       description,
       type: taskType.id,
@@ -106,25 +114,79 @@ export default function useCreateModal(initialState, addTask, setShowModal) {
       location: { start: startLocation, end: endLocation },
       time: { start: startTime, end: endTime },
     };
-    addTask(task);
+    return task;
   }
 
   function handleSubmit() {
     const newErrors = validateSubmit(form);
     if (Object.keys(newErrors).length) {
       setError(newErrors);
-      console.log("why");
     } else {
-      handleAddTask();
-      setShowModal(false);
+      // need to transform form state to the shape of task state in useCalendar
+      // addTask return array of conflicted tasks if any
+      const conflictedTasks = addTask(transformFormToTaskShape(form));
+      if (conflictedTasks?.length) {
+        setConflictedTasks(conflictedTasks);
+        setShowConflictOptions(true);
+      } else {
+        // close modal if no errors in form and no conflict
+        setShowModal(false);
+        setForm(initialState);
+      }
     }
+  }
+
+  function handlePlaceAroundConflict(place) {
+    let newEndTime;
+    let newStartTime;
+    const taskDuration = form.endHour - form.startHour;
+    if (place === "before") {
+      // element at conflictedTasks[0] is the earliest conflict
+      newEndTime = conflictedTasks[0].time.start;
+      newStartTime = newEndTime - taskDuration;
+    } else if (place === "after") {
+      // sort task with the latest end time to index 0
+      newStartTime = conflictedTasks.sort((a, b) => b.time.end - a.time.end)[0]
+        .time.end;
+      newEndTime = newStartTime + taskDuration;
+    }
+    // convert time (in hours) to time of day (ex: 6:00)
+    const newEndHour = newEndTime % 24;
+    const newStartHour = newStartTime % 24;
+    const conflictResolvedForm = {
+      ...form,
+      startHour: newStartHour,
+      endHour: newEndHour,
+    };
+    const task = transformFormToTaskShape(conflictResolvedForm);
+    // first parameter is task to be added, rest are to be deleted
+    addAndDeleteTask(task, task.id);
+    setShowModal(false);
+    setShowConflictOptions(false);
+    setForm(initialState);
+  }
+
+  function handleOverrideConflict() {
+    console.log("conflicted tasks", conflictedTasks);
+    const task = transformFormToTaskShape(form);
+    addAndDeleteTask(task, ...conflictedTasks.map((task) => task.id));
+    setShowModal(false);
+    setShowConflictOptions(false);
+    setForm(initialState);
+  }
+  function closeConflictOptions() {
+    setShowConflictOptions(false);
   }
   return {
     form,
+    showConflictOptions,
+    closeConflictOptions,
     errors,
     handleOnChange,
     handleDriverChange,
     handleTaskTypeChange,
     handleSubmit,
+    handlePlaceAroundConflict,
+    handleOverrideConflict,
   };
 }

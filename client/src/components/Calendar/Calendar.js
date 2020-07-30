@@ -10,6 +10,7 @@ export default function () {
   const {
     addTask,
     deleteTask,
+    addAndDeleteTask,
     changeWeekBy,
     driversSelected,
     driversList,
@@ -32,6 +33,7 @@ export default function () {
         driversList={driversList}
         addTask={addTask}
         deleteTask={deleteTask}
+        addAndDeleteTask={addAndDeleteTask}
       />
     );
   });
@@ -43,6 +45,7 @@ export default function () {
           driversList={driversList}
           toggleDriverSelected={toggleDriverSelected}
           addTask={addTask}
+          addAndDeleteTask={addAndDeleteTask}
         />
       </div>
       <div className="calendar-main">

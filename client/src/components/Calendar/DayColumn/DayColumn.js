@@ -9,6 +9,7 @@ export default function ({
   driversList,
   addTask,
   deleteTask,
+  addAndDeleteTask,
 }) {
   // add 24 HourBlocks to each DayColumn
   // each HourBlock is assigned an hour
@@ -26,6 +27,7 @@ export default function ({
         driversList={driversList}
         addTask={addTask}
         deleteTask={deleteTask}
+        addAndDeleteTask={addAndDeleteTask}
       />
     ));
 
