@@ -36,12 +36,9 @@ export default function CalendarHeader(props) {
       </div>
       <div className="calendar-header-right">
         Change week to
-        <input
-          // not using type='number'
-          // since easier to use regex to limit value to 0<=x<-51
-          value={weekInput}
-          onChange={handleOnChange}
-        />
+        {/* not using type='number' */}
+        {/* since easier to use regex to limit value to 0<=x<-51 */}
+        <input value={weekInput} onChange={handleOnChange} />
         <FontAwesomeIcon icon={faArrowRight} onClick={handleWeekJump} />
       </div>
     </div>

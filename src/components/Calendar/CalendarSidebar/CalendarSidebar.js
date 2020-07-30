@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./calendarSidebar.scss";
 import DropdownMultiple from "../../Dropdown/DropdownMultiple";
-// import TextInput from "../../Form/TextInput/TextInput"
+import TextInput from "../../Form/TextInput/TextInput";
 import CreateModal from "./CreateModal/CreateModal";
 import GenerateCsv from "./GenerateCsv/GenerateCsv";
 export default function CalendarSidebar(props) {
@@ -31,6 +31,7 @@ export default function CalendarSidebar(props) {
           toggle={toggleDriverSelected}
           title="Select Drivers"
         />
+        <TextInput />
       </div>
       <div className="csv-generation-wrapper side-bar-wrapper">
         <GenerateCsv yearlyTasks={yearlyTasks} driversList={driversList} />
