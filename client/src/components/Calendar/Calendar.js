@@ -20,6 +20,7 @@ export default function () {
     handleOnChange,
     handleWeekJump,
     toggleDriverSelected,
+    yearlyTasks,
   } = useCalendar();
   const days = ["Sun", "Mon", "Tue", "Thu", "Fri", "Sat"];
   //task of each day is passed to each DayColumn
@@ -46,6 +47,7 @@ export default function () {
           toggleDriverSelected={toggleDriverSelected}
           addTask={addTask}
           addAndDeleteTask={addAndDeleteTask}
+          yearlyTasks={yearlyTasks}
         />
       </div>
       <div className="calendar-main">

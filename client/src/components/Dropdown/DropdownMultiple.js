@@ -37,6 +37,7 @@ export default function Dropdown({ title = "none", list = [], toggle }) {
     <>
       {/* when list open, show transparent backdrop under dd that closes dd when clicked on  */}
       {listOpen && <div className="dd-backdrop" onClick={toggleList}></div>}
+      {/* z-index ensures list is above sibling elements when open */}
       <div className="dd-wrapper">
         <button
           type="button"

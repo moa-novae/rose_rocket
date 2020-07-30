@@ -252,5 +252,6 @@ export default function useCalendar() {
     driversSelected,
     driversList,
     toggleDriverSelected,
+    yearlyTasks,
   };
 }
