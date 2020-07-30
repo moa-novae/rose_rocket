@@ -18,8 +18,8 @@ export default function Modal({
     }
   }, [showModal, handleOnClose]);
   return (
-    // only show modal if showModal === true
     <>
+      {/* only show modal if showModal === true */}
       {showModal && (
         <>
           <div
