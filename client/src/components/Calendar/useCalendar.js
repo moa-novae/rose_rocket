@@ -73,8 +73,8 @@ export default function useCalendar() {
   ]);
   const [yearlyTasks, setYearlyTasks] = useState(initialYearTasks);
 
-  // sort yearlyTasks to find conflicting tasks easier
-  // sorted from earliest to latest
+  // function ensures yearlyTasks is always sorted from earliest to latest
+  // ensures finding of conflicted schedules
   const sortTasks = function (taskMap) {
     return new Map(
       [...taskMap.entries()].sort((a, b) => a[1].time.start - b[1].time.start)

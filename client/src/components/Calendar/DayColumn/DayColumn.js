@@ -2,6 +2,7 @@ import React from "react";
 import "./dayColumn.scss";
 import HourBlock from "./HourBlock/HourBlock";
 import Task from "./Task/Task";
+import findOverlappingTasks from "../../../utils/findOverlappingTasks";
 export default function ({
   day,
   dailyTasks,
@@ -16,20 +17,22 @@ export default function ({
   const hourBlocks = Array(24).fill(<HourBlock />);
 
   // the filter allows tasks that have drivers selected to show up
-  const tasks = dailyTasks
-    .filter((task) =>
-      drivers.some((driver) => driver.selected && driver.id === task.driver.id)
-    )
-    .map((task) => (
-      <Task
-        key={task.id}
-        taskInfo={task}
-        driversList={driversList}
-        addTask={addTask}
-        deleteTask={deleteTask}
-        addAndDeleteTask={addAndDeleteTask}
-      />
-    ));
+  const visibleTasks = dailyTasks.filter((task) =>
+    drivers.some((driver) => driver.selected && driver.id === task.driver.id)
+  );
+  const overlappingTaskIds = findOverlappingTasks(visibleTasks);
+
+  const tasks = visibleTasks.map((task) => (
+    <Task
+      key={task.id}
+      taskInfo={task}
+      driversList={driversList}
+      addTask={addTask}
+      deleteTask={deleteTask}
+      addAndDeleteTask={addAndDeleteTask}
+      overlap={overlappingTaskIds.includes(task.id)}
+    />
+  ));
 
   return (
     <div className="day-column">

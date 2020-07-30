@@ -2,4 +2,7 @@
   background-color: sandybrown;
   position: absolute;
   width: 90%;
+  &:hover {
+    z-index: 100;
+  }
 }

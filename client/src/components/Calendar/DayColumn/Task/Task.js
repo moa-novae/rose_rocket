@@ -3,8 +3,10 @@ import TaskModal from "./TaskModal/TaskModal";
 import "./task.scss";
 
 export default function Task(props) {
-  const { addTask, taskInfo, driversList, deleteTask, addAndDeleteTask} = props;
+  const { addTask, taskInfo, driversList, deleteTask, addAndDeleteTask, overlap} = props;
   const [showModal, setShowModal] = useState(false);
+  // lane is used for horizontal offsets when more than one task share an hour block
+  const lane = driversList.map((driver)=> driver.id).indexOf(taskInfo.driver.id) + 1
   return (
     <>
       {taskInfo && (
@@ -26,6 +28,7 @@ export default function Task(props) {
             style={{
               height: `${3 * taskInfo.duration - 0.1}em`,
               top: `${3 * taskInfo.hour + 0.05}em`,
+              width: `${100 - lane * 4}%`
             }}
             onClick={() => {
               setShowModal(true);
