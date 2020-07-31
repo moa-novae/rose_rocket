@@ -10,11 +10,17 @@ export default function DriverBgSelection({ driver, handleDriverBgChange }) {
     const newValue = e.target.value;
     setInputColour(newValue);
   }
-  // on
+  /* I am not sure how to handle the missing dependency warning
+  adding handleDriverBgChange to dependency causes infinite rendering 
+  most likely because of states which it receives from its enclosing closure.
+  */
+  // Every time the form state is changed, check if it is valid hex colour
+  // if it is, change the state in useCalendar
   useEffect(() => {
     if (isHexColour.test(inputColour)) {
       handleDriverBgChange(inputColour, driver.id);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inputColour]);
   return (
     <div className="driver-color-selection">
