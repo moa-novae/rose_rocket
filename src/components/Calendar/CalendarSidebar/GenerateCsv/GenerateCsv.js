@@ -18,23 +18,22 @@ export default function ({ yearlyTasks, driversList }) {
   return (
     <div className="csv-download">
       <h3>CSV summary export</h3>
-      <div className="csv-options">
-        <div className="day-option">
-          <div className="csv-option-label">Select Interval</div>
-          <DropdownSingle
-            list={possibleInterval}
-            select={setCsvInterval}
-            selected={csvInterval}
-          />
-        </div>
-        <div className="driver-option">
-          <div className="csv-option-label">Select Driver</div>
-          <DropdownSingle
-            list={driversList}
-            select={setDriverSelected}
-            selected={driverSelected}
-          />
-        </div>
+
+      <div className="day-option">
+        <div className="csv-option-label">Select Interval</div>
+        <DropdownSingle
+          list={possibleInterval}
+          select={setCsvInterval}
+          selected={csvInterval}
+        />
+      </div>
+      <div className="driver-option">
+        <div className="csv-option-label">Select Driver</div>
+        <DropdownSingle
+          list={driversList}
+          select={setDriverSelected}
+          selected={driverSelected}
+        />
       </div>
 
       <CSVLink
