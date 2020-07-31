@@ -18,7 +18,7 @@ export default function CalendarHeader(props) {
   return (
     <div className="calendar-header">
       <div className="calendar-header-left">
-        <div className="calendar-week">{`Week ${week}`}</div>
+        <div className="calendar-week">{`Week ${week + 1}`}</div>
         <div className="calendar-week-btns">
           <div className="calendar-week-btn">
             <FontAwesomeIcon
