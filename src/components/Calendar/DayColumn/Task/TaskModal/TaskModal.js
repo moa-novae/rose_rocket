@@ -9,7 +9,7 @@ import {
   faEdit,
   faTrashAlt,
 } from "@fortawesome/free-solid-svg-icons";
-import { convertTime } from "../../../../../utils/convertTime";
+import { convertTime, findDayFromTime } from "../../../../../utils/convertTime";
 import "./taskModal.scss";
 export default function TaskModal({
   taskInfo,
@@ -21,7 +21,7 @@ export default function TaskModal({
   addAndDeleteTask,
 }) {
   // transform time into human readable day and hour
-  const day = taskInfo.time.start % (24 * 7);
+  const day = findDayFromTime(taskInfo.time.start);
   const week = Math.floor(convertTime(taskInfo.time.start, "hour", "week"));
   const startHour = taskInfo.time.start % 24;
   const endHour = taskInfo.time.end % 24;
@@ -74,7 +74,7 @@ export default function TaskModal({
               <FontAwesomeIcon icon={faClock} />
 
               <div>
-                {`From week ${week} day ${day} hour ${startHour} to ${endHour}`}
+                {`From week ${week + 1} ${day} hour ${startHour} to ${endHour}`}
               </div>
             </div>
 

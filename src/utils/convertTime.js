@@ -8,3 +8,16 @@ export const timeRatio = {
 export const convertTime = function (time, from, to) {
   return time * (timeRatio[from] / timeRatio[to]);
 };
+
+export const findDayFromTime = function (time) {
+  const days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  return days[Math.floor((time % (24 * 7)) / 24)];
+};

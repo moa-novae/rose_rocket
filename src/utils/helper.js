@@ -4,3 +4,4 @@ export const indexOfObjectInArray = function (arr, id) {
 };
 
 export const isHexColour = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/;
+
