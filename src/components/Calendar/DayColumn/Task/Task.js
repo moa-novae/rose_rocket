@@ -26,6 +26,11 @@ export default function Task(props) {
   // choose font colour dynamically depending on bg
   const taskFontColour =
     bgBrightness(taskBgColour) === "bright" ? "#3c4043" : "#fafafa";
+  // -0.1 and +0.05 allows sliver of space between connective tasks
+  const taskHeightNum = 3 * taskInfo.duration - 0.1;
+  const taskHeight = `${taskHeightNum}em`;
+  const top = `${3 * taskInfo.hour + 0.05}em`;
+  const width = `${100 - lane * 4}%`;
   return (
     <>
       {taskInfo && (
@@ -45,9 +50,9 @@ export default function Task(props) {
             className="task"
             // -0.1 and +0.05 allows sliver of space between connective tasks
             style={{
-              height: `${3 * taskInfo.duration - 0.1}em`,
-              top: `${3 * taskInfo.hour + 0.05}em`,
-              width: `${100 - lane * 4}%`,
+              height: taskHeight,
+              top,
+              width,
               backgroundColor: taskBgColour,
               color: taskFontColour,
             }}
@@ -56,7 +61,10 @@ export default function Task(props) {
             }}
           >
             <div className="task-name">{taskInfo.name}</div>
-            <div className="task-description">{taskInfo.description}</div>
+            {/* only allow rendering of location when height larger than 3em */}
+            {taskHeightNum > 3 && (
+              <div className="task-description">{`From ${taskInfo.location.start} to ${taskInfo.location.finish}`}</div>
+            )}
           </div>
         </>
       )}
