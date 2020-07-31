@@ -1,6 +1,10 @@
 // inspired by https://css-tricks.com/switch-font-color-for-different-backgrounds-with-css/
 import { hexToRgb } from "./hexToRgb";
 export const bgBrightness = function (hex) {
+  const isHexColour = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/;
+  if (!isHexColour.test(hex) || !hexToRgb(hex)) {
+    return;
+  }
   const { r, g, b } = hexToRgb(hex);
   //the threshold at which colors are considered "light"
   const threshold = 0.5;

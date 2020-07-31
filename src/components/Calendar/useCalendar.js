@@ -1,6 +1,7 @@
 import { useState } from "react";
 import uniqueId from "../../utils/uniqueId";
 import { initialDrivers, initialYearTasks } from "../../utils/sampleData";
+import { indexOfObjectInArray } from "../../utils/helper";
 /*
   I couldn't find a good library that implements time on 
   a 24 h / 7 day / 52 week discrete timescale. Popular libraries 
@@ -191,6 +192,14 @@ export default function useCalendar() {
     changeWeekBy(weekDifference);
   };
 
+  const handleDriverBgChange = function (newColour, driverId) {
+    const driverIndex = indexOfObjectInArray(driversList, driverId);
+    setDrivers((prev) => {
+      const newState = [...prev];
+      newState[driverIndex].colour = newColour;
+      return newState;
+    });
+  };
   // find the task of the week currently viewed
   let weeklyTasks = Array.from(yearlyTasks.values()).filter((task) => {
     return Math.floor(convertTime(task.time.start, "hour", "week")) === week;
@@ -213,6 +222,7 @@ export default function useCalendar() {
     weekInput,
     handleOnChange,
     handleWeekJump,
+    handleDriverBgChange,
     driversSelected,
     driversList,
     toggleDriverSelected,

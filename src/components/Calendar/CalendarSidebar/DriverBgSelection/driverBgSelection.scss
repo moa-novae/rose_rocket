@@ -1,0 +1,16 @@
+.driver-color-selection {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  .driver-name {
+    width: 63%;
+  }
+  & > div {
+    width: 37%;
+    margin-right: 0.3em;
+  }
+  & .text-input {
+    border: 0;
+  }
+}

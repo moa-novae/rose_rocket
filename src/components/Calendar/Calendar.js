@@ -19,6 +19,7 @@ export default function () {
     weekInput,
     handleOnChange,
     handleWeekJump,
+    handleDriverBgChange,
     toggleDriverSelected,
     yearlyTasks,
   } = useCalendar();
@@ -49,6 +50,7 @@ export default function () {
           addTask={addTask}
           addAndDeleteTask={addAndDeleteTask}
           yearlyTasks={yearlyTasks}
+          handleDriverBgChange={handleDriverBgChange}
         />
       </div>
       <div className="calendar-main">

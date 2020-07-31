@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import "./calendarSidebar.scss";
 import DropdownMultiple from "../../Dropdown/DropdownMultiple";
-import TextInput from "../../Form/TextInput/TextInput";
+
 import CreateModal from "./CreateModal/CreateModal";
 import GenerateCsv from "./GenerateCsv/GenerateCsv";
+import DriverBgSelection from "./DriverBgSelection/DriverBgSelection";
 export default function CalendarSidebar(props) {
   const {
     addTask,
@@ -12,8 +13,17 @@ export default function CalendarSidebar(props) {
     toggleDriverSelected,
     addAndDeleteTask,
     yearlyTasks,
+    handleDriverBgChange,
   } = props;
   const [showCreateModal, setShowCreateModal] = useState(false);
+
+  const driverBgSelections = driversList.map((driver) => (
+    <DriverBgSelection
+      key={driver.id}
+      driver={driver}
+      handleDriverBgChange={handleDriverBgChange}
+    />
+  ));
   return (
     <div className="calendar-sidebar-content">
       <div className="new-task-btn-wrapper">
@@ -31,7 +41,9 @@ export default function CalendarSidebar(props) {
           toggle={toggleDriverSelected}
           title="Select Drivers"
         />
-        <TextInput />
+        <div className="driver-color-selection-wrapper">
+          {driverBgSelections}
+        </div>
       </div>
       <div className="csv-generation-wrapper side-bar-wrapper">
         <GenerateCsv yearlyTasks={yearlyTasks} driversList={driversList} />

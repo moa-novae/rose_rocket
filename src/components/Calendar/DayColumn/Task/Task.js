@@ -26,7 +26,6 @@ export default function Task(props) {
   // choose font colour dynamically depending on bg
   const taskFontColour =
     bgBrightness(taskBgColour) === "bright" ? "#3c4043" : "#fafafa";
-  console.log(taskFontColour);
   return (
     <>
       {taskInfo && (
