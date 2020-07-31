@@ -26,7 +26,7 @@ export default function useCreateModal(
       !form.startDay ||
       !form.startHour ||
       !form.endHour ||
-      form.endHour < form.startHour
+      parseInt(form.endHour) < parseInt(form.startHour)
     ) {
       newError.time = "Please enter a valid time";
     }
