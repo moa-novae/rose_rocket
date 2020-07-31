@@ -13,7 +13,7 @@ export const initialYearTasks = new Map([
       type: "pickup",
       time: { start: 100, end: 103 },
       driver: { id: 1, name: "Darius the Great" },
-      location: { start: "a", finish: "b" },
+      location: { start: "a", end: "b" },
     },
   ],
   [
@@ -25,7 +25,7 @@ export const initialYearTasks = new Map([
       type: "pickup",
       time: { start: 103, end: 104 },
       driver: { id: 1, name: "Ivan the Terrible" },
-      location: { start: "a", finish: "b" },
+      location: { start: "a", end: "b" },
     },
   ],
   [
@@ -37,7 +37,7 @@ export const initialYearTasks = new Map([
       type: "dropoff",
       time: { start: 200, end: 202 },
       driver: { id: 2, name: "Richard the Lionheart" },
-      location: { start: "c", finish: "d" },
+      location: { start: "c", end: "d" },
     },
   ],
 ]);

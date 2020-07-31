@@ -61,10 +61,12 @@ export default function Task(props) {
             }}
           >
             <div className="task-name">{taskInfo.name}</div>
-            {/* only allow rendering of location when height larger than 3em */}
-            {taskHeightNum > 3 && (
-              <div className="task-description">{`From ${taskInfo.location.start} to ${taskInfo.location.finish}`}</div>
-            )}
+            {/* only allow rendering of location when height larger than 3em and location exist*/}
+            {taskHeightNum > 3 &&
+              taskInfo.location.start &&
+              taskInfo.location.end && (
+                <div className="task-description">{`From ${taskInfo.location.start} to ${taskInfo.location.end}`}</div>
+              )}
           </div>
         </>
       )}

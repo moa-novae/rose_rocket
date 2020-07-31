@@ -9,6 +9,5 @@ export const bgBrightness = function (hex) {
   //the threshold at which colors are considered "light"
   const threshold = 0.5;
   const perceivedBrightness = (r * 0.2126 + g * 0.7152 + b * 0.0722) / 255;
-  console.log(r, g, b);
   return perceivedBrightness < threshold ? "dark" : "bright";
 };

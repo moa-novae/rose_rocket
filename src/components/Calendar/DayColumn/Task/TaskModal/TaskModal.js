@@ -36,7 +36,7 @@ export default function TaskModal({
     startHour: taskInfo.time.start % 24,
     endHour: taskInfo.time.end % 24,
     startLocation: taskInfo.location.start,
-    endLocation: taskInfo.location.finish,
+    endLocation: taskInfo.location.end,
     description: taskInfo.description,
   };
   const [mode, setMode] = useState("view");
@@ -72,9 +72,8 @@ export default function TaskModal({
             </div>
 
             <div className="task-line">
-              <FontAwesomeIcon icon={faClock} />
-
               <div>
+                <FontAwesomeIcon icon={faClock} />
                 {`From week ${week + 1} ${day} hour ${startHour} to ${endHour}`}
               </div>
             </div>
@@ -82,9 +81,11 @@ export default function TaskModal({
             <div className="task-line">
               <FontAwesomeIcon icon={faMapMarkerAlt} />
 
-              <div>
-                {`From ${taskInfo.location.start} to ${taskInfo.location.finish}`}
-              </div>
+              {taskInfo.location.start && taskInfo.location.end && (
+                <div>
+                  {`From ${taskInfo.location.start} to ${taskInfo.location.end}`}
+                </div>
+              )}
             </div>
             <div className="task-line no-icon">
               <div>{taskInfo.description}</div>
