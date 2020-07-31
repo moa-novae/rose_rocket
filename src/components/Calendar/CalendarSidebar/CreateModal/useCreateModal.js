@@ -88,7 +88,7 @@ export default function useCreateModal(
       endHour,
       id,
     } = form;
-    const day = convertTime(startDay, "day", "hour") -1;
+    const day = convertTime(startDay - 1, "day", "hour");
     const startTime = day + parseInt(startHour);
     const endTime = day + parseInt(endHour);
     const task = {
