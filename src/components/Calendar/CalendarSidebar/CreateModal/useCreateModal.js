@@ -34,7 +34,7 @@ export default function useCreateModal(
   }
 
   function validateOnChange(name, newValue, oldState) {
-    const validDay = /^([0-9]|[1-8][0-9]|9[0-9]|[12][0-9]{2}|3[0-5][0-9]|36[0-3])$/;
+    const validDay = /^([1-9]|[1-8][0-9]|9[0-9]|[12][0-9]{2}|3[0-5][0-9]|36[0-3])$/;
     const validHour = /^([0-9]|1[0-9]|2[0-3])$/;
     switch (name) {
       case "startDay":
