@@ -31,7 +31,8 @@ export default function TaskModal({
     name: taskInfo.name,
     taskType: { id: taskInfo.type },
     driver: { id: taskInfo.driver.id },
-    startDay: Math.floor(convertTime(taskInfo.time.start, "hour", "day")),
+    // add 1 so users thanks day 0 is day 1
+    startDay: Math.floor(convertTime(taskInfo.time.start, "hour", "day")) + 1,
     startHour: taskInfo.time.start % 24,
     endHour: taskInfo.time.end % 24,
     startLocation: taskInfo.location.start,

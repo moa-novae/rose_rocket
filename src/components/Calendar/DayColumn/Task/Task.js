@@ -55,10 +55,8 @@ export default function Task(props) {
               setShowModal(true);
             }}
           >
-            <div className="task-name">
-              {taskInfo.name}
-              <div className="task-description">{taskInfo.description}</div>
-            </div>
+            <div className="task-name">{taskInfo.name}</div>
+            <div className="task-description">{taskInfo.description}</div>
           </div>
         </>
       )}

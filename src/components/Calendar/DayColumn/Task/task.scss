@@ -1,6 +1,13 @@
 .task {
   position: absolute;
   width: 90%;
+  padding: 5%;
+  box-sizing: border-box;
+  div {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word
+  }
   &:hover {
     z-index: 100;
   }
