@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { convertTime } from "../../../../utils/convertTime";
-import TaskModal from "../../DayColumn/Task/TaskModal/TaskModal";
 export default function useCreateModal(
   initialState,
   addTask,
@@ -156,7 +155,6 @@ export default function useCreateModal(
           task.time.end = task.time.start + taskDuration;
         }
       }
-
       // first parameter is task to be added, rest are to be deleted
       // the task itself need to be deleted in case of edits to stop false conflicts
       // keep checking for free space until no conflict and task not over night

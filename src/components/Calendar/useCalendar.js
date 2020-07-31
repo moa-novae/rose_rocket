@@ -66,7 +66,8 @@ export default function useCalendar() {
         conflictedTasks.push(existingTask);
       }
       // check if existing task end time between new task start/end
-      else if (
+
+      if (
         existingTask.time.end > newTask.time.start &&
         existingTask.time.end <= newTask.time.end
       ) {
@@ -74,7 +75,7 @@ export default function useCalendar() {
       }
 
       // should leave loop when existing tasks happen after new task
-      else if (existingTask.time.start >= newTask.time.end) {
+      if (existingTask.time.start >= newTask.time.end) {
         break;
       }
     }
@@ -111,6 +112,7 @@ export default function useCalendar() {
   addTask, to stop any updates to the task state */
   const addAndDeleteTask = function (taskToBeAdded, ...taskToBeDeleted) {
     let conflictedTasks = [];
+    conflictedTasks = checkTimeConflict(taskToBeAdded, yearlyTasks);
     setYearlyTasks((prev) => {
       const newTasksMap = new Map(prev);
       taskToBeDeleted.forEach((taskId) => {
