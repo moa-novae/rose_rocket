@@ -22,7 +22,7 @@ export default function useCalendar() {
   // weeks starts incrementing at 0
   const [calendarTime, setCalendarTime] = useState(0);
   // state responsible for controlled input of calendar header weeks
-  const [weekInput, setWeekInput] = useState(calendarTime);
+  const [weekInput, setWeekInput] = useState(1);
   // keep track of which drivers fall under the dispatcher each year
   // and whether they are shown on the calendar
 
@@ -188,7 +188,10 @@ export default function useCalendar() {
 
   // change week to selected week from week input box
   const handleWeekJump = function () {
-    const weekDifference = weekInput - week;
+    // -1 because under the hood, time starts at week 0
+    // so for ux sake, weekInput is one higher than actual week
+    // weekInput treats start as week 1
+    const weekDifference = weekInput - week - 1; 
     changeWeekBy(weekDifference);
   };
 
