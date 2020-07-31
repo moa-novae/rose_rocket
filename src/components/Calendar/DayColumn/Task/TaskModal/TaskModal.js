@@ -72,10 +72,8 @@ export default function TaskModal({
             </div>
 
             <div className="task-line">
-              <div>
-                <FontAwesomeIcon icon={faClock} />
-                {`From week ${week + 1} ${day} hour ${startHour} to ${endHour}`}
-              </div>
+              <FontAwesomeIcon icon={faClock} />
+              {`From week ${week + 1} ${day} hour ${startHour} to ${endHour}`}
             </div>
 
             <div className="task-line">
