@@ -50,7 +50,6 @@ export default function useCalendar() {
     const conflictedTasks = [];
     for (const [, existingTask] of yearlyTasks) {
       // if different drivers, pass
-
       if (existingTask.driver.id !== newTask.driver.id) {
         continue;
       }
@@ -73,6 +72,7 @@ export default function useCalendar() {
       ) {
         conflictedTasks.push(existingTask);
       }
+
       // should leave loop when existing tasks happen after new task
       else if (existingTask.time.start >= newTask.time.end) {
         break;
@@ -191,7 +191,7 @@ export default function useCalendar() {
     // -1 because under the hood, time starts at week 0
     // so for ux sake, weekInput is one higher than actual week
     // weekInput treats start as week 1
-    const weekDifference = weekInput - week - 1; 
+    const weekDifference = weekInput - week - 1;
     changeWeekBy(weekDifference);
   };
 

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { convertTime } from "../../../../utils/convertTime";
+import TaskModal from "../../DayColumn/Task/TaskModal/TaskModal";
 export default function useCreateModal(
   initialState,
   addTask,
@@ -133,15 +134,27 @@ export default function useCreateModal(
       task.time.start % 24 > task.time.end % 24
     ) {
       if (place === "before") {
-        // element at conflictedTasks[0] is the earliest conflict
-        task.time.end = localConflictedTasks[0].time.start;
-        task.time.start = task.time.end - taskDuration;
+        // if task is crossing day
+        if (!localConflictedTasks[0]) {
+          task.time.end = task.time.end - (task.time.end % 24) - 1;
+          task.time.start = task.time.end - taskDuration;
+        } else {
+          // element at conflictedTasks[0] is the earliest conflict
+          task.time.end = localConflictedTasks[0].time.start;
+          task.time.start = task.time.end - taskDuration;
+        }
       } else if (place === "after") {
-        // sort task with the latest end time to index 0
-        task.time.start = localConflictedTasks.sort(
-          (a, b) => b.time.end - a.time.end
-        )[0].time.end;
-        task.time.end = task.time.start + taskDuration;
+        // if task is crossing day
+        if (!localConflictedTasks[0]) {
+          task.time.start = task.time.start + (24 - (task.time.start % 24));
+          task.time.end = task.time.start + taskDuration;
+        } else {
+          // sort task with the latest end time to index 0
+          task.time.start = localConflictedTasks.sort(
+            (a, b) => b.time.end - a.time.end
+          )[0].time.end;
+          task.time.end = task.time.start + taskDuration;
+        }
       }
 
       // first parameter is task to be added, rest are to be deleted
