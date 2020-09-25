@@ -23,7 +23,7 @@ export default function () {
     toggleDriverSelected,
     yearlyTasks,
   } = useCalendar();
-  const days = ["Sun", "Mon", "Tue", "Thu", "Fri", "Sat"];
+  const days = ["Sun", "Mon", "Tue","Wed", "Thu", "Fri", "Sat"];
   //task of each day is passed to each DayColumn
   const dayColumns = days.map((day, i) => {
     const dailyTasks = weeklyTasks.filter((task) => task.day === i);

@@ -58,21 +58,20 @@ export default function useCalendar() {
       else if (existingTask.id === newTask.id) {
         continue;
       }
-      // check if existing task start time between new task start/end
-      if (
-        existingTask.time.start >= newTask.time.start &&
-        existingTask.time.start < newTask.time.end
-      ) {
-        conflictedTasks.push(existingTask);
-      }
-      // check if existing task end time between new task start/end
 
-      if (
-        existingTask.time.end > newTask.time.start &&
-        existingTask.time.end <= newTask.time.end
-      ) {
+      // check if existing task start before new task
+      if (existingTask.time.start < newTask.time.start) {
+        // If so, check if existing task end after new task start
+        if (existingTask.time.end > newTask.time.start) {
+          conflictedTasks.push(existingTask);
+        }
+      }
+      // if existing task doesn't start before new task, check if
+      // existing task starts before new task finish
+      else if (existingTask.time.start < newTask.time.end) {
         conflictedTasks.push(existingTask);
       }
+
 
       // should leave loop when existing tasks happen after new task
       if (existingTask.time.start >= newTask.time.end) {
